@@ -2857,15 +2857,35 @@ BANGLADESH_BANKS = {
     </footer>
 
     <!-- JavaScript -->
+        <!-- JavaScript -->
     <script>
-        // Preloader
+        // ============================================
+        // PRELOADER - FIXED
+        // ============================================
+        function hidePreloader() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.classList.add('hidden');
+                // Remove from DOM after animation completes
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    // Trigger reveal check after preloader is gone
+                    checkReveals();
+                }, 1000);
+            }
+        }
+
+        // Hide preloader when page is fully loaded
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('preloader').classList.add('hidden');
-            }, 800);
+            setTimeout(hidePreloader, 500);
         });
 
-        // Demo Data
+        // Fallback: Hide preloader after max 3 seconds even if load event issues
+        setTimeout(hidePreloader, 3000);
+
+        // ============================================
+        // DEMO DATA
+        // ============================================
         const scenarios = {
             standard: {
                 chequeClass: '',
@@ -3028,78 +3048,164 @@ BANGLADESH_BANKS = {
         let currentScenario = 'standard';
         let isProcessing = false;
 
-        // Reveal Animation
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+        // ============================================
+        // REVEAL ANIMATIONS - FIXED
+        // ============================================
+        let revealObserver = null;
+
+        function checkReveals() {
+            const revealElements = document.querySelectorAll('.reveal:not(.active)');
+            
+            revealElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+                
+                // Check if element is in viewport
+                if (rect.top <= windowHeight * 0.9 && rect.bottom >= 0) {
+                    el.classList.add('active');
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-        
-        revealElements.forEach(el => revealObserver.observe(el));
+        }
 
-        // Scroll Progress
-        window.addEventListener('scroll', () => {
+        function initRevealObserver() {
+            // Check if IntersectionObserver is supported
+            if ('IntersectionObserver' in window) {
+                revealObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            // Optionally unobserve after revealing
+                            revealObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { 
+                    threshold: 0.1, 
+                    rootMargin: '0px 0px -10% 0px' 
+                });
+                
+                document.querySelectorAll('.reveal').forEach(el => {
+                    revealObserver.observe(el);
+                });
+            } else {
+                // Fallback: use scroll event for older browsers
+                window.addEventListener('scroll', checkReveals, { passive: true });
+                checkReveals(); // Initial check
+            }
+            
+            // Also do an immediate check for elements already in viewport
+            setTimeout(checkReveals, 100);
+        }
+
+        // ============================================
+        // SCROLL PROGRESS
+        // ============================================
+        function updateScrollProgress() {
             const scrollIndicator = document.getElementById('scrollIndicator');
-            const scrollTop = window.scrollY;
+            if (!scrollIndicator) return;
+            
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollIndicator.style.width = scrollPercent + '%';
-        });
+            
+            if (docHeight > 0) {
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                scrollIndicator.style.width = scrollPercent + '%';
+            }
+        }
 
-        // Tab Switching
-        document.querySelectorAll('.demo-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                currentScenario = tab.dataset.scenario;
-                updateChequeDisplay();
-                resetOutput();
+        // ============================================
+        // DEMO TAB SWITCHING
+        // ============================================
+        function initDemoTabs() {
+            document.querySelectorAll('.demo-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentScenario = tab.dataset.scenario;
+                    updateChequeDisplay();
+                    resetOutput();
+                });
             });
-        });
+        }
 
         function updateChequeDisplay() {
             const scenario = scenarios[currentScenario];
-            const cheque = document.getElementById('chequePreview');
+            if (!scenario) return;
             
+            const cheque = document.getElementById('chequePreview');
+            if (!cheque) return;
+            
+            // Reset classes
             cheque.className = 'cheque-container';
             if (scenario.chequeClass) {
                 cheque.classList.add(scenario.chequeClass);
             }
             
-            document.querySelector('.cheque-bank-logo').innerHTML = 
-                `<div>${scenario.bankLogo}</div><div class="cheque-bank-name">${scenario.bankNameBn}</div>`;
-            document.getElementById('chequeDate').textContent = scenario.date;
-            document.getElementById('chequePayee').innerHTML = `Pay: <strong>${scenario.payee}</strong>`;
-            document.getElementById('chequeAmountWords').textContent = scenario.amountWords;
-            document.getElementById('chequeAmountFig').textContent = scenario.amountFig;
-            document.getElementById('chequeAccount').textContent = `A/C: ${scenario.account}`;
-            document.getElementById('chequeMicr').textContent = scenario.micr;
-            document.getElementById('chequeSignature').textContent = scenario.signature;
+            // Update content safely
+            const bankLogo = document.querySelector('.cheque-bank-logo');
+            if (bankLogo) {
+                bankLogo.innerHTML = `<div>${scenario.bankLogo}</div><div class="cheque-bank-name">${scenario.bankNameBn}</div>`;
+            }
+            
+            const elements = {
+                'chequeDate': scenario.date,
+                'chequePayee': `Pay: <strong>${scenario.payee}</strong>`,
+                'chequeAmountWords': scenario.amountWords,
+                'chequeAmountFig': scenario.amountFig,
+                'chequeAccount': `A/C: ${scenario.account}`,
+                'chequeMicr': scenario.micr,
+                'chequeSignature': scenario.signature
+            };
+            
+            for (const [id, value] of Object.entries(elements)) {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (id === 'chequePayee') {
+                        el.innerHTML = value;
+                    } else {
+                        el.textContent = value;
+                    }
+                }
+            }
         }
 
         function resetOutput() {
-            document.querySelectorAll('.output-field-value').forEach(el => el.textContent = '—');
+            document.querySelectorAll('.output-field-value').forEach(el => {
+                el.textContent = '—';
+            });
+            
             document.querySelectorAll('.output-field-confidence').forEach(el => {
                 el.textContent = '—';
                 el.className = 'output-field-confidence';
             });
-            document.querySelectorAll('.output-field').forEach(el => el.classList.remove('extracted'));
-            document.getElementById('validationResult').style.display = 'none';
-            document.getElementById('procTime').textContent = '—';
-            document.getElementById('procModels').textContent = '—';
-            document.getElementById('procQuality').textContent = '—';
+            
+            document.querySelectorAll('.output-field').forEach(el => {
+                el.classList.remove('extracted');
+            });
+            
+            const validationResult = document.getElementById('validationResult');
+            if (validationResult) {
+                validationResult.style.display = 'none';
+            }
+            
+            const procTime = document.getElementById('procTime');
+            const procModels = document.getElementById('procModels');
+            const procQuality = document.getElementById('procQuality');
+            
+            if (procTime) procTime.textContent = '—';
+            if (procModels) procModels.textContent = '—';
+            if (procQuality) procQuality.textContent = '—';
             
             const cheque = document.getElementById('chequePreview');
-            cheque.classList.remove('scanning', 'processed');
+            if (cheque) {
+                cheque.classList.remove('scanning', 'processed');
+            }
         }
 
         function resetDemo() {
             currentScenario = 'standard';
             document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
-            document.querySelector('.demo-tab[data-scenario="standard"]').classList.add('active');
+            const standardTab = document.querySelector('.demo-tab[data-scenario="standard"]');
+            if (standardTab) standardTab.classList.add('active');
             updateChequeDisplay();
             resetOutput();
         }
@@ -3109,20 +3215,33 @@ BANGLADESH_BANKS = {
             isProcessing = true;
             
             const btn = document.getElementById('processBtn');
+            if (!btn) return;
+            
             btn.disabled = true;
             btn.textContent = 'Processing...';
             
             const cheque = document.getElementById('chequePreview');
-            cheque.classList.add('scanning');
+            if (cheque) {
+                cheque.classList.add('scanning');
+            }
             
             resetOutput();
             
             const scenario = scenarios[currentScenario];
+            if (!scenario) {
+                isProcessing = false;
+                btn.disabled = false;
+                btn.textContent = 'Process Cheque';
+                return;
+            }
+            
             const actualTime = Math.round(scenario.time + Math.random() * 400 - 200);
             
             setTimeout(() => {
-                cheque.classList.remove('scanning');
-                cheque.classList.add('processed');
+                if (cheque) {
+                    cheque.classList.remove('scanning');
+                    cheque.classList.add('processed');
+                }
                 
                 const fields = [
                     ['outBank', 'outBankConf', scenario.result.bank],
@@ -3141,30 +3260,45 @@ BANGLADESH_BANKS = {
                         const confEl = document.getElementById(field[1]);
                         const data = field[2];
                         
-                        valueEl.textContent = data.value;
-                        confEl.textContent = data.conf + '%';
-                        confEl.className = 'output-field-confidence ' + 
-                            (data.conf >= 90 ? 'confidence-high' : 
-                             data.conf >= 75 ? 'confidence-medium' : 'confidence-low');
-                        
-                        valueEl.closest('.output-field').classList.add('extracted');
+                        if (valueEl && confEl && data) {
+                            valueEl.textContent = data.value;
+                            confEl.textContent = data.conf + '%';
+                            confEl.className = 'output-field-confidence ' + 
+                                (data.conf >= 90 ? 'confidence-high' : 
+                                 data.conf >= 75 ? 'confidence-medium' : 'confidence-low');
+                            
+                            const fieldContainer = valueEl.closest('.output-field');
+                            if (fieldContainer) {
+                                fieldContainer.classList.add('extracted');
+                            }
+                        }
                     }, index * 120);
                 });
                 
+                // Show validation after all fields
                 setTimeout(() => {
                     const validationEl = document.getElementById('validationResult');
-                    validationEl.style.display = 'flex';
-                    validationEl.className = 'validation-status ' + 
-                        (scenario.validation.valid ? 'valid' : 'warning');
-                    validationEl.querySelector('.validation-icon').textContent = 
-                        scenario.validation.valid ? '✅' : '⚠️';
-                    validationEl.querySelector('h4').textContent = 
-                        scenario.validation.valid ? 'Validation Passed' : 'Needs Review';
-                    document.getElementById('validationMessage').textContent = scenario.validation.message;
+                    if (validationEl) {
+                        validationEl.style.display = 'flex';
+                        validationEl.className = 'validation-status ' + 
+                            (scenario.validation.valid ? 'valid' : 'warning');
+                        
+                        const icon = validationEl.querySelector('.validation-icon');
+                        const title = validationEl.querySelector('h4');
+                        const message = document.getElementById('validationMessage');
+                        
+                        if (icon) icon.textContent = scenario.validation.valid ? '✅' : '⚠️';
+                        if (title) title.textContent = scenario.validation.valid ? 'Validation Passed' : 'Needs Review';
+                        if (message) message.textContent = scenario.validation.message;
+                    }
                     
-                    document.getElementById('procTime').textContent = actualTime + 'ms';
-                    document.getElementById('procModels').textContent = scenario.models;
-                    document.getElementById('procQuality').textContent = scenario.quality;
+                    const procTime = document.getElementById('procTime');
+                    const procModels = document.getElementById('procModels');
+                    const procQuality = document.getElementById('procQuality');
+                    
+                    if (procTime) procTime.textContent = actualTime + 'ms';
+                    if (procModels) procModels.textContent = scenario.models;
+                    if (procQuality) procQuality.textContent = scenario.quality;
                     
                     btn.disabled = false;
                     btn.textContent = 'Process Cheque';
@@ -3174,47 +3308,122 @@ BANGLADESH_BANKS = {
             }, 1500 + Math.random() * 800);
         }
 
-        // Copy Code
+        // ============================================
+        // CODE COPY
+        // ============================================
         function copyCode(button) {
-            const codeBlock = button.closest('.code-wrapper');
-            const code = codeBlock.querySelector('pre').textContent;
+            const codeWrapper = button.closest('.code-wrapper');
+            if (!codeWrapper) return;
             
-            navigator.clipboard.writeText(code).then(() => {
-                button.textContent = 'Copied!';
-                button.style.borderColor = 'var(--accent)';
-                button.style.color = 'var(--accent)';
-                
-                setTimeout(() => {
-                    button.textContent = 'Copy';
-                    button.style.borderColor = '';
-                    button.style.color = '';
-                }, 2000);
+            const pre = codeWrapper.querySelector('pre');
+            if (!pre) return;
+            
+            const code = pre.textContent;
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(code).then(() => {
+                    showCopySuccess(button);
+                }).catch(() => {
+                    fallbackCopy(code, button);
+                });
+            } else {
+                fallbackCopy(code, button);
+            }
+        }
+
+        function fallbackCopy(text, button) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopySuccess(button);
+            } catch (err) {
+                console.error('Copy failed:', err);
+            }
+            
+            document.body.removeChild(textarea);
+        }
+
+        function showCopySuccess(button) {
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            button.style.borderColor = 'var(--accent)';
+            button.style.color = 'var(--accent)';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.borderColor = '';
+                button.style.color = '';
+            }, 2000);
+        }
+
+        // ============================================
+        // DOC TYPE CARDS
+        // ============================================
+        function initDocTypeCards() {
+            document.querySelectorAll('.doc-type-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.doc-type-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                });
             });
         }
 
-        // Doc Type Cards
-        document.querySelectorAll('.doc-type-card').forEach(card => {
-            card.addEventListener('click', () => {
-                document.querySelectorAll('.doc-type-card').forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
+        // ============================================
+        // SMOOTH SCROLL
+        // ============================================
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#') return;
+                    
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    }
+                });
             });
-        });
+        }
 
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        function init() {
+            // Initialize all components
+            initRevealObserver();
+            initDemoTabs();
+            initDocTypeCards();
+            initSmoothScroll();
+            
+            // Initial display update
             updateChequeDisplay();
-        });
+            
+            // Scroll progress
+            window.addEventListener('scroll', updateScrollProgress, { passive: true });
+            updateScrollProgress();
+            
+            // Resize handler for reveal check
+            window.addEventListener('resize', () => {
+                setTimeout(checkReveals, 100);
+            }, { passive: true });
+        }
+
+        // Run init when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
     </script>
 </body>
 </html>
