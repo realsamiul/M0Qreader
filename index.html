@@ -3,20 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BanglaFinance AI - Intelligent Document Processing for Bangladesh</title>
-    <meta name="description" content="AI-powered financial document processing for Bangladesh. From cheques to tax forms, we understand Bengali and English with 99.5% accuracy.">
-    
+    <title>BanglaFinance - AI-Powered Document Processing</title>
     <style>
-        /* --- FONT DECLARATIONS --- */
+        /* - FONTS - */
+        @font-face {
+            font-family: 'Satoshi';
+            src: url('Satoshi-Variable.woff2') format('woff2'),
+                 url('Satoshi-Variable.woff') format('woff');
+            font-weight: 300 900;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Satoshi';
+            src: url('Satoshi-VariableItalic.woff2') format('woff2'),
+                 url('Satoshi-VariableItalic.woff') format('woff');
+            font-weight: 300 900;
+            font-style: italic;
+            font-display: swap;
+        }
         @font-face {
             font-family: 'Editorial New';
-            src: url('EditorialNew-Ultralight.woff2') format('woff2'),
-                 url('EditorialNew-Ultralight.woff') format('woff');
+            src: url('EditorialNew-Thin.woff2') format('woff2'),
+                 url('EditorialNew-Thin.woff') format('woff');
             font-weight: 200;
             font-style: normal;
             font-display: swap;
         }
-
         @font-face {
             font-family: 'Editorial New';
             src: url('EditorialNew-Light.woff2') format('woff2'),
@@ -25,7 +38,6 @@
             font-style: normal;
             font-display: swap;
         }
-
         @font-face {
             font-family: 'Editorial New';
             src: url('EditorialNew-Regular.woff2') format('woff2'),
@@ -34,7 +46,6 @@
             font-style: normal;
             font-display: swap;
         }
-
         @font-face {
             font-family: 'Editorial New';
             src: url('EditorialNew-Medium.woff2') format('woff2'),
@@ -43,7 +54,6 @@
             font-style: normal;
             font-display: swap;
         }
-
         @font-face {
             font-family: 'Editorial New';
             src: url('EditorialNew-Bold.woff2') format('woff2'),
@@ -53,7 +63,7 @@
             font-display: swap;
         }
 
-        /* --- CORE VARIABLES --- */
+        /* - CORE VARIABLES - */
         :root {
             --black: #000000;
             --white: #ffffff;
@@ -67,42 +77,33 @@
             --warning: #FFC700;
             --alert: #FF4A4A;
             --text-muted: rgba(255, 255, 255, 0.7);
-            
             --font-editorial: 'Editorial New', Georgia, serif;
-            --font-sans: 'Editorial New', Georgia, serif;
-            --font-mono: 'SF Mono', Monaco, 'Courier New', monospace;
-            --font-bengali: 'Noto Sans Bengali', 'Kalpurush', sans-serif;
-            
+            --font-sans: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'Satoshi', 'SF Mono', Monaco, 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', monospace;
+            --max-width: 1200px;
+            --gutter: 2rem;
             --space-xs: 0.5rem;
             --space-sm: 1rem;
-            --space-md: 2rem;
-            --space-lg: 4rem;
-            --space-xl: 6rem;
-            --space-2xl: 8rem;
-            --space-3xl: 12rem;
-            
-            --max-width: 1440px;
-            --gutter: 5vw;
-            
-            --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-            --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
-            --duration: 0.8s;
-            --duration-long: 1.2s;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --space-2xl: 4rem;
+            --space-3xl: 6rem;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* --- RESET --- */
-        *, *::before, *::after {
+        /* - BASE STYLES - */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        *::before, *::after {
+            box-sizing: border-box;
+        }
         html {
-            font-size: 16px;
-            scroll-behavior: smooth;
             overflow-x: hidden;
         }
-
         body {
             font-family: var(--font-editorial);
             background-color: var(--black);
@@ -115,7 +116,7 @@
             font-feature-settings: "kern" 1, "liga" 1;
         }
 
-        /* --- LOCOMOTIVE-STYLE TYPOGRAPHY --- */
+        /* - LOCOMOTIVE-STYLE TYPOGRAPHY - */
         h1, h2, h3, h4, h5, h6 {
             font-family: var(--font-editorial);
             font-weight: 300;
@@ -123,34 +124,29 @@
             line-height: 0.95;
             margin: 0;
         }
-
         h1 {
             font-size: clamp(3.5rem, 12vw, 9rem);
             font-weight: 200;
             margin-bottom: var(--space-lg);
             letter-spacing: -0.03em;
         }
-
         h2 {
             font-size: clamp(2.5rem, 8vw, 5.5rem);
             font-weight: 300;
             margin-bottom: var(--space-lg);
         }
-
         h3 {
             font-size: clamp(1.75rem, 5vw, 3rem);
             font-weight: 400;
             margin-bottom: var(--space-md);
             line-height: 1.1;
         }
-
         h4 {
             font-size: clamp(1.25rem, 3vw, 1.75rem);
             font-weight: 500;
             margin-bottom: var(--space-sm);
             line-height: 1.2;
         }
-
         p {
             font-family: var(--font-editorial);
             font-size: clamp(1rem, 1.5vw, 1.25rem);
@@ -160,7 +156,6 @@
             color: var(--text-muted);
             max-width: 70ch;
         }
-
         .large-text {
             font-family: var(--font-editorial);
             font-size: clamp(1.5rem, 3vw, 2.5rem);
@@ -168,7 +163,6 @@
             line-height: 1.3;
             letter-spacing: -0.01em;
         }
-
         .mono {
             font-family: var(--font-mono);
             font-size: 0.7rem;
@@ -177,7 +171,7 @@
             font-weight: 500;
         }
 
-        /* --- LAYOUT --- */
+        /* - LAYOUT - */
         .container {
             width: 100%;
             max-width: var(--max-width);
@@ -186,26 +180,23 @@
             position: relative;
             z-index: 2;
         }
-
         .container-wide {
             width: 100%;
             max-width: 1600px;
             margin: 0 auto;
             padding: 0 var(--gutter);
         }
-
         section {
             padding: var(--space-3xl) 0;
             position: relative;
         }
-
         @media (max-width: 768px) {
             section {
                 padding: var(--space-2xl) 0;
             }
         }
 
-        /* --- SECTION LABELS --- */
+        /* - SECTION LABELS - */
         .section-label {
             font-family: var(--font-mono);
             font-size: 0.7rem;
@@ -218,7 +209,6 @@
             gap: 1.5rem;
             opacity: 0.9;
         }
-
         .section-label::before {
             content: '';
             width: 60px;
@@ -226,7 +216,7 @@
             background: var(--accent);
         }
 
-        /* --- NAVIGATION ISLAND --- */
+        /* - NAVIGATION ISLAND - */
         .nav-island {
             position: fixed;
             bottom: 2rem;
@@ -242,17 +232,7 @@
             display: flex;
             align-items: center;
             gap: 2rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            transition: all 0.4s var(--ease-out-expo);
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-
-        .nav-island:hover {
-            transform: translateX(-50%) translateY(-3px);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 1);
-        }
-
         .nav-island a {
             font-family: var(--font-mono);
             font-size: 0.65rem;
@@ -264,22 +244,17 @@
             transition: color 0.3s ease;
             padding: 0.5rem 0;
         }
-
         .nav-island a:hover {
             color: var(--accent);
         }
-
         .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-family: var(--font-mono);
             font-weight: 700;
             font-size: 0.8rem;
             letter-spacing: 0;
             text-transform: none;
             font-family: var(--font-editorial);
         }
-
         .nav-logo-icon {
             width: 24px;
             height: 24px;
@@ -291,19 +266,121 @@
             font-size: 0.75rem;
             color: var(--black);
         }
-
         @media (max-width: 768px) {
             .nav-island {
                 padding: 0.75rem 1.5rem;
                 gap: 1rem;
             }
-            
             .nav-island a:not(.nav-logo) {
                 display: none;
             }
         }
 
-        /* --- HERO SECTION --- */
+        /* Visually Hidden Utility */
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        /* Toggle Button */
+        .nav-toggle {
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: none; /* Initially hidden, show on smaller screens */
+            color: var(--black);
+            margin-right: 1rem;
+        }
+
+        /* Hidden Menu List */
+        .nav-menu-list {
+            display: flex; /* Default flex layout */
+            gap: 1rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu-list a {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--black);
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu-list a:hover {
+            color: var(--accent);
+        }
+
+        /* Mobile styles for mini menu */
+        @media (max-width: 768px) {
+            .nav-island {
+                flex-wrap: wrap; /* Allow wrapping if menu is open */
+                padding: 0.75rem 1rem; /* Adjust padding */
+                gap: 0.5rem; /* Adjust gap */
+                justify-content: center; /* Center content */
+                align-items: center; /* Align items */
+            }
+
+            .nav-logo {
+                order: 1; /* Put logo first */
+                margin: 0 0.5rem; /* Add margin */
+            }
+
+            .nav-toggle {
+                display: block; /* Show toggle button */
+                order: 2; /* Put toggle second */
+            }
+
+            .nav-menu-list {
+                position: absolute; /* Position absolutely */
+                top: calc(100% + 0.5rem); /* Position below the island */
+                left: 50%;
+                transform: translateX(-50%); /* Center the menu */
+                background: rgba(255, 255, 255, 0.95); /* Match island bg */
+                backdrop-filter: blur(20px) saturate(180%);
+                -webkit-backdrop-filter: blur(20px) saturate(180%);
+                border-radius: 8px;
+                padding: 1rem;
+                flex-direction: column; /* Stack links vertically */
+                gap: 0.75rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                z-index: 1001; /* Above island */
+                width: calc(100% - 2rem); /* Almost full width */
+                max-height: 70vh; /* Limit height */
+                overflow-y: auto; /* Scroll if needed */
+                opacity: 0;
+                visibility: hidden;
+                transform: translateX(-50%) translateY(-10px); /* Start slightly above */
+                transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            }
+
+            /* Show menu when checkbox is checked */
+            .nav-toggle-checkbox:checked ~ .nav-menu-list {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(-50%) translateY(0); /* Move to correct position */
+            }
+
+            /* Hide original links in island on mobile */
+            .nav-island a:not(.nav-logo, .nav-toggle) {
+                display: none;
+            }
+        }
+
+
+        /* - HERO SECTION - */
         .hero {
             min-height: 100vh;
             min-height: 100dvh;
@@ -313,7 +390,6 @@
             overflow: hidden;
             padding: var(--space-xl) 0;
         }
-
         .hero-bg {
             position: absolute;
             top: 0;
@@ -322,7 +398,6 @@
             height: 100%;
             z-index: 0;
         }
-
         .hero-bg::after {
             content: '';
             position: absolute;
@@ -333,99 +408,61 @@
             background: radial-gradient(ellipse at 30% 50%, rgba(0, 224, 84, 0.08) 0%, transparent 60%),
                         radial-gradient(ellipse at 70% 80%, rgba(0, 156, 166, 0.05) 0%, transparent 50%);
         }
-
         .hero-grid {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
             background-size: 80px 80px;
             z-index: 0;
         }
-
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 1;
+            max-width: 700px;
         }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: var(--space-lg);
-        }
-
-        .hero-badge-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.3); }
-        }
-
-        .hero-badge-text {
+        .hero-subtitle {
             font-family: var(--font-mono);
-            font-size: 0.7rem;
-            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--accent);
+            margin-bottom: var(--space-sm);
         }
-
-        .hero h1 {
-            max-width: 1000px;
+        .hero-title {
+            margin-bottom: var(--space-md);
         }
-
-        .hero h1 .highlight {
-            color: var(--accent);
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-            font-weight: 300;
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: var(--space-xl);
             color: var(--text-muted);
-            max-width: 650px;
-            margin-bottom: var(--space-lg);
-            line-height: 1.5;
         }
-
         .hero-actions {
             display: flex;
             gap: 1.5rem;
             flex-wrap: wrap;
-            margin-bottom: var(--space-2xl);
         }
-
         .hero-stats {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: var(--space-xl);
-            flex-wrap: wrap;
-            padding-top: var(--space-lg);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: var(--space-3xl);
         }
-
         .hero-stat {
             display: flex;
             flex-direction: column;
         }
-
         .hero-stat-value {
             font-family: var(--font-editorial);
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 200;
-            color: var(--accent);
             line-height: 1;
-            letter-spacing: -0.02em;
+            color: var(--white);
+            margin-bottom: 0.5rem;
         }
-
         .hero-stat-label {
             font-family: var(--font-mono);
             font-size: 0.65rem;
@@ -435,7 +472,7 @@
             margin-top: 0.5rem;
         }
 
-        /* --- BUTTONS --- */
+        /* - BUTTONS - */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -453,87 +490,178 @@
             position: relative;
             overflow: hidden;
         }
-
         .btn-primary {
             background: var(--accent);
             color: var(--black);
         }
-
         .btn-primary:hover {
-            background: var(--white);
-            transform: translateY(-2px);
+            background: var(--accent-dim);
+            color: var(--black);
         }
-
         .btn-secondary {
             background: transparent;
             color: var(--white);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-
         .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
             border-color: var(--accent);
             color: var(--accent);
         }
 
-        /* --- STAT GRID --- */
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1px;
-            background: rgba(255, 255, 255, 0.05);
-            margin: var(--space-xl) 0;
+        /* - BACKGROUND VARIANTS - */
+        .bg-dark { background: #0a0a0a; }
+        .bg-white { background: var(--white); color: var(--black); }
+        .bg-white p { color: rgba(0, 0, 0, 0.7); }
+        .bg-white h2, .bg-white h3, .bg-white h4 { color: var(--black); }
+        .bg-white .section-label { color: var(--accent); }
+        .bg-white .section-label::before { background: var(--accent); }
+
+        /* Alternating Section Backgrounds */
+        section:nth-of-type(even) {
+            background-color: var(--white);
+            color: var(--black);
+        }
+        section:nth-of-type(even) p {
+            color: rgba(0, 0, 0, 0.7);
+        }
+        section:nth-of-type(even) h2,
+        section:nth-of-type(even) h3,
+        section:nth-of-type(even) h4,
+        section:nth-of-type(even) .section-label,
+        section:nth-of-type(even) .highlight {
+            color: var(--black);
+        }
+        section:nth-of-type(even) .section-label {
+             color: var(--accent);
+        }
+        section:nth-of-type(even) .section-label::before {
+             background: var(--accent);
+        }
+        section:nth-of-type(even) .hero-subtitle,
+        section:nth-of-type(even) p.large-text,
+        section:nth-of-type(even) .stat-label,
+        section:nth-of-type(even) .hero-stat-label,
+        section:nth-of-type(even) .output-field-label,
+        section:nth-of-type(even) .code-content,
+        section:nth-of-type(even) .code-content pre {
+            color: rgba(0, 0, 0, 0.7);
+        }
+        section:nth-of-type(even) .stat-item,
+        section:nth-of-type(even) .problem-card,
+        section:nth-of-type(even) .doc-type-card,
+        section:nth-of-type(even) .scenario-card,
+        section:nth-of-type(even) .pricing-card,
+        section:nth-of-type(even) .arch-layer,
+        section:nth-of-type(even) .code-wrapper {
+            background-color: var(--black);
+            color: var(--white);
+        }
+        section:nth-of-type(even) .stat-grid,
+        section:nth-of-type(even) .comparison-table,
+        section:nth-of-type(even) .scenarios-grid,
+        section:nth-of-type(even) .pricing-grid {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(even) .comparison-table th,
+        section:nth-of-type(even) .comparison-table td {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        section:nth-of-type(even) .btn-primary {
+             color: var(--white);
+             background: var(--black);
+        }
+        section:nth-of-type(even) .btn-primary:hover {
+             color: var(--black);
+             background: var(--accent);
+        }
+        section:nth-of-type(even) .btn-secondary {
+             color: var(--black);
+             border-color: rgba(0, 0, 0, 0.2);
+        }
+        section:nth-of-type(even) .btn-secondary:hover {
+             color: var(--accent);
+             border-color: var(--accent);
         }
 
-        @media (min-width: 768px) {
-            .stat-grid {
-                grid-template-columns: repeat(4, 1fr);
+
+        /* - RESPONSIVE - */
+        @media (max-width: 768px) {
+            :root {
+                --gutter: 1.5rem;
+            }
+            h1 {
+                line-height: 1;
+            }
+            .hero-stats {
+                gap: var(--space-lg);
             }
         }
 
-        .stat-item {
-            background: var(--black);
-            padding: var(--space-lg);
-            text-align: center;
+        /* - SCROLLBAR - */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--gray-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-dim);
         }
 
-        .stat-number {
-            font-family: var(--font-editorial);
-            font-size: clamp(3rem, 7vw, 5rem);
-            font-weight: 200;
-            color: var(--accent);
-            line-height: 1;
-            letter-spacing: -0.02em;
-            margin-bottom: var(--space-sm);
+        /* - REVEAL ANIMATIONS - */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 1.2s var(--ease-out-expo);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* - SCROLL INDICATOR - */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--accent);
+            z-index: 9999;
+            transform-origin: left;
+            transition: transform 0.1s ease;
         }
 
-        .stat-label {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-        }
-
-        /* --- PROBLEM CARDS --- */
+        /* - PROBLEM SECTION - */
         .problem-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--space-md);
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
             margin-top: var(--space-xl);
         }
-
-        @media (min-width: 600px) {
+        @media (max-width: 768px) {
             .problem-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
             }
         }
-
-        @media (min-width: 1000px) {
-            .problem-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
         .problem-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -541,7 +669,6 @@
             transition: all 0.4s var(--ease-out-expo);
             position: relative;
         }
-
         .problem-card::before {
             content: '';
             position: absolute;
@@ -554,21 +681,25 @@
             transform-origin: left;
             transition: transform 0.4s var(--ease-out-expo);
         }
-
         .problem-card:hover {
             border-color: rgba(255, 74, 74, 0.3);
             background: rgba(255, 74, 74, 0.03);
         }
-
         .problem-card:hover::before {
             transform: scaleX(1);
         }
-
         .problem-icon {
             font-size: 2rem;
             margin-bottom: var(--space-md);
         }
-
+        .problem-title {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-sm);
+        }
+        .problem-description {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
         .problem-stat {
             font-family: var(--font-editorial);
             font-size: clamp(2rem, 4vw, 3rem);
@@ -577,26 +708,23 @@
             margin-bottom: var(--space-xs);
         }
 
-        /* --- DOCUMENT TYPES --- */
+        /* - DOCUMENT TYPES - */
         .doc-types-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: var(--space-sm);
             margin-top: var(--space-xl);
         }
-
         @media (min-width: 600px) {
             .doc-types-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
-
         @media (min-width: 1000px) {
             .doc-types-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
         }
-
         .doc-type-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -605,29 +733,23 @@
             transition: all 0.4s var(--ease-out-expo);
             cursor: pointer;
         }
-
-        .doc-type-card:hover,
-        .doc-type-card.active {
+        .doc-type-card:hover, .doc-type-card.active {
             border-color: var(--accent);
             transform: translateY(-4px);
         }
-
         .doc-type-card.active {
             background: rgba(0, 224, 84, 0.03);
         }
-
         .doc-type-icon {
             font-size: 2.5rem;
             margin-bottom: var(--space-sm);
         }
-
         .doc-type-name {
             font-family: var(--font-editorial);
             font-weight: 500;
             font-size: 0.9rem;
             margin-bottom: var(--space-xs);
         }
-
         .doc-type-status {
             font-family: var(--font-mono);
             font-size: 0.6rem;
@@ -637,79 +759,50 @@
             border-radius: 100px;
             display: inline-block;
         }
-
         .doc-type-status.live {
             background: rgba(0, 224, 84, 0.1);
             color: var(--accent);
         }
-
         .doc-type-status.coming {
             background: rgba(255, 199, 0, 0.1);
             color: var(--warning);
         }
-
         .doc-type-status.planned {
             background: rgba(255, 255, 255, 0.05);
             color: var(--text-muted);
         }
 
-        /* --- DEMO SECTION --- */
+        /* - DEMO SECTION - */
         .demo-container {
             background: rgba(255, 255, 255, 0.01);
             border: 1px solid rgba(255, 255, 255, 0.05);
             overflow: hidden;
             margin-top: var(--space-xl);
         }
-
         .demo-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: var(--space-md) var(--space-lg);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(0, 0, 0, 0.3);
-            flex-wrap: wrap;
-            gap: var(--space-sm);
         }
-
-        .demo-tabs {
-            display: flex;
-            gap: 0.25rem;
-            flex-wrap: wrap;
-        }
-
-        .demo-tab {
-            padding: 0.75rem 1.25rem;
+        .demo-title {
             font-family: var(--font-mono);
-            font-size: 0.65rem;
-            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--text-muted);
         }
-
-        .demo-tab:hover {
-            color: var(--white);
-        }
-
-        .demo-tab.active {
-            background: var(--accent);
-            color: var(--black);
-        }
-
         .demo-status {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+        }
+        .demo-status-text {
             font-family: var(--font-mono);
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             letter-spacing: 0.05em;
             color: var(--text-muted);
         }
-
         .demo-status-dot {
             width: 6px;
             height: 6px;
@@ -717,127 +810,84 @@
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
-
         .demo-body {
             display: grid;
             grid-template-columns: 1fr;
             min-height: 500px;
         }
-
         @media (min-width: 900px) {
             .demo-body {
                 grid-template-columns: 1fr 1fr;
             }
         }
-
         .demo-input {
             padding: var(--space-lg);
             border-right: 1px solid rgba(255, 255, 255, 0.05);
         }
-
         .demo-output {
             padding: var(--space-lg);
             background: rgba(0, 0, 0, 0.2);
         }
-
         /* Cheque Visualization */
         .cheque-container {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             border-radius: 4px;
-            padding: var(--space-md);
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 2.5/1;
-            min-height: 200px;
-        }
-
-        .cheque-container.blurry { filter: blur(2px); }
-        .cheque-container.low-light { filter: brightness(0.4); }
-        .cheque-container.rotated { transform: rotate(-5deg) scale(0.95); }
-
-        .scan-line {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            animation: scanAnim 2s infinite linear;
-            opacity: 0;
-        }
-
-        .cheque-container.scanning .scan-line {
-            opacity: 1;
-        }
-
-        @keyframes scanAnim {
-            0% { top: 0; }
-            100% { top: 100%; }
-        }
-
-        .field-highlight {
-            position: absolute;
-            border: 2px solid var(--accent);
-            border-radius: 2px;
-            background: rgba(0, 224, 84, 0.1);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .cheque-container.processed .field-highlight {
-            opacity: 1;
-        }
-
-        .cheque-bank-logo {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: #1a5f2a;
-        }
-
-        .cheque-bank-name {
-            font-size: 0.55rem;
-            color: #666;
-            font-weight: 400;
-        }
-
-        .cheque-field {
-            position: absolute;
+            padding: var(--space-sm);
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-family: var(--font-mono);
             font-size: 0.65rem;
             color: #333;
+            text-align: center;
+            transition: all 0.3s ease;
         }
-
-        .cheque-date { top: 1rem; right: 1rem; }
-        .cheque-payee { top: 35%; left: 1rem; }
-        .cheque-amount-words { top: 50%; left: 1rem; font-size: 0.55rem; }
-        .cheque-amount-fig { top: 35%; right: 1rem; font-weight: 700; font-size: 0.8rem; }
-        .cheque-account { bottom: 2rem; left: 1rem; font-size: 0.55rem; }
-        .cheque-micr { bottom: 0.5rem; left: 50%; transform: translateX(-50%); font-size: 0.45rem; letter-spacing: 0.1em; }
-
-        .cheque-signature {
+        .cheque-container.scanning {
+            filter: blur(1px);
+            opacity: 0.7;
+        }
+        .cheque-container.processed {
+            filter: none;
+            opacity: 1;
+        }
+        .cheque-bank-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .cheque-bank-name {
+            font-family: var(--font-editorial);
+            font-weight: bold;
+            font-size: 0.7rem;
+        }
+        .cheque-date {
             position: absolute;
-            bottom: 1.5rem;
-            right: 1rem;
-            width: 70px;
-            height: 25px;
-            border-bottom: 1px solid #333;
+            top: var(--space-sm);
+            right: var(--space-sm);
         }
-
-        .cheque-signature-text {
-            font-family: 'Brush Script MT', cursive;
-            font-size: 0.9rem;
-            color: #1a365d;
-            transform: rotate(-5deg);
+        .cheque-payee, .cheque-amount-words, .cheque-amount-fig, .cheque-account, .cheque-micr, .cheque-signature {
+            text-align: left;
+            margin: 0.5rem 0;
         }
-
+        .cheque-amount-fig {
+            font-weight: bold;
+        }
+        .cheque-micr {
+            font-family: 'OCR A Extended', monospace;
+            letter-spacing: 0.1em;
+        }
+        .cheque-signature {
+            margin-top: 1rem;
+            font-style: italic;
+            border-top: 1px solid #333;
+            padding-top: 0.5rem;
+        }
         /* Output Fields */
         .output-section {
             margin-bottom: var(--space-lg);
         }
-
         .output-title {
             font-family: var(--font-mono);
             font-size: 0.65rem;
@@ -849,13 +899,11 @@
             align-items: center;
             gap: 0.5rem;
         }
-
         .output-fields {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
         }
-
         .output-field {
             display: flex;
             justify-content: space-between;
@@ -865,125 +913,109 @@
             border-left: 2px solid transparent;
             transition: all 0.3s ease;
         }
-
         .output-field.extracted {
             border-left-color: var(--accent);
             background: rgba(0, 224, 84, 0.03);
         }
-
         .output-field-label {
             font-family: var(--font-mono);
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            font-size: 0.7rem;
             color: var(--text-muted);
         }
-
         .output-field-value {
-            font-family: var(--font-editorial);
-            font-size: 0.9rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
             color: var(--white);
+            font-weight: 500;
         }
-
         .output-field-confidence {
             font-family: var(--font-mono);
-            font-size: 0.6rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 2px;
-            margin-left: 0.5rem;
+            font-size: 0.65rem;
+            color: var(--text-muted);
         }
-
-        .confidence-high {
-            background: rgba(0, 224, 84, 0.1);
+        .output-field-confidence.confidence-high {
             color: var(--accent);
         }
-
-        .confidence-medium {
-            background: rgba(255, 199, 0, 0.1);
+        .output-field-confidence.confidence-medium {
             color: var(--warning);
         }
-
-        .confidence-low {
-            background: rgba(255, 74, 74, 0.1);
+        .output-field-confidence.confidence-low {
             color: var(--alert);
         }
-
-        .validation-status {
+        .validation-result {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: var(--space-sm);
+            gap: 0.75rem;
+            padding: var(--space-md);
             margin-top: var(--space-md);
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.2);
         }
-
-        .validation-status.valid {
-            background: rgba(0, 224, 84, 0.05);
-            border: 1px solid rgba(0, 224, 84, 0.1);
-        }
-
-        .validation-status.warning {
-            background: rgba(255, 199, 0, 0.05);
-            border: 1px solid rgba(255, 199, 0, 0.1);
-        }
-
         .validation-icon {
             font-size: 1.5rem;
         }
-
-        .validation-text h4 {
+        .validation-title {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+        .validation-message {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .proc-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+        }
+        .proc-info-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .proc-info-label {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
             margin-bottom: 0.25rem;
         }
-
-        .validation-text p {
+        .proc-info-value {
+            font-family: var(--font-mono);
             font-size: 0.8rem;
-            margin-bottom: 0;
+            color: var(--white);
         }
 
-        /* --- SCENARIOS --- */
+        /* - SCENARIOS - */
         .scenarios-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--space-md);
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-lg);
             margin-top: var(--space-xl);
         }
-
-        @media (min-width: 768px) {
-            .scenarios-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .scenarios-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
         .scenario-card {
-            background: rgba(255, 255, 255, 0.01);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
             overflow: hidden;
-            transition: all 0.4s var(--ease-out-expo);
+            transition: all 0.3s ease;
         }
-
         .scenario-card:hover {
-            border-color: rgba(0, 224, 84, 0.2);
+            transform: translateY(-4px);
+            border-color: var(--accent);
         }
-
         .scenario-header {
             padding: var(--space-md);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         .scenario-title {
             display: flex;
             align-items: center;
             gap: 0.75rem;
         }
-
         .scenario-icon {
             width: 40px;
             height: 40px;
@@ -994,7 +1026,6 @@
             font-size: 1.25rem;
             background: rgba(255, 199, 0, 0.1);
         }
-
         .scenario-badge {
             font-family: var(--font-mono);
             font-size: 0.6rem;
@@ -1004,12 +1035,10 @@
             background: rgba(0, 224, 84, 0.1);
             color: var(--accent);
         }
-
         .scenario-preview {
             padding: var(--space-md);
             background: rgba(0, 0, 0, 0.2);
         }
-
         .scenario-cheque {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             border-radius: 4px;
@@ -1023,26 +1052,15 @@
             color: #333;
             text-align: center;
         }
-
         .scenario-cheque.blurry { filter: blur(2px); }
         .scenario-cheque.dark { filter: brightness(0.4); }
         .scenario-cheque.rotated { transform: rotate(-8deg) scale(0.95); }
-        .scenario-cheque.crumpled { 
-            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 50%, #e9ecef 100%);
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
-        }
-        .scenario-cheque.handwritten { 
-            font-family: 'Brush Script MT', cursive; 
-            font-size: 0.9rem; 
-        }
-        .scenario-cheque.partial { 
-            clip-path: polygon(0 0, 85% 0, 100% 15%, 100% 100%, 0 100%);
-        }
-
+        .scenario-cheque.crumpled { background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 50%, #e9ecef 100%); box-shadow: inset 0 0 20px rgba(0,0,0,0.1); }
+        .scenario-cheque.handwritten { font-family: 'Brush Script MT', cursive; font-size: 0.9rem; }
+        .scenario-cheque.partial { clip-path: polygon(0 0, 85% 0, 100% 15%, 100% 100%, 0 100%); }
         .scenario-result {
             padding: var(--space-md);
         }
-
         .scenario-result-item {
             display: flex;
             justify-content: space-between;
@@ -1050,26 +1068,23 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             font-size: 0.8rem;
         }
-
         .scenario-result-item:last-child {
             border-bottom: none;
         }
 
-        /* --- ARCHITECTURE --- */
+        /* - ARCHITECTURE - */
         .architecture-flow {
             display: flex;
             flex-direction: column;
             gap: var(--space-lg);
             margin-top: var(--space-xl);
         }
-
         .arch-layer {
             background: rgba(255, 255, 255, 0.01);
             border: 1px solid rgba(255, 255, 255, 0.05);
             padding: var(--space-lg);
             position: relative;
         }
-
         .arch-layer::before {
             content: attr(data-layer);
             position: absolute;
@@ -1083,7 +1098,6 @@
             letter-spacing: 0.15em;
             color: var(--accent);
         }
-
         .arch-layer-title {
             font-family: var(--font-editorial);
             font-size: 1.5rem;
@@ -1093,7 +1107,6 @@
             align-items: center;
             gap: 0.75rem;
         }
-
         .arch-layer-icon {
             width: 40px;
             height: 40px;
@@ -1104,119 +1117,40 @@
             justify-content: center;
             font-size: 1.25rem;
         }
-
         .arch-layer p {
             font-size: 0.9rem;
             margin-bottom: var(--space-md);
         }
-
         .arch-models {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: var(--space-sm);
         }
-
         .arch-model {
             background: rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.03);
             padding: var(--space-sm);
             transition: all 0.3s ease;
         }
-
         .arch-model:hover {
             border-color: var(--accent);
         }
-
         .arch-model-name {
             font-family: var(--font-editorial);
             font-weight: 500;
             font-size: 0.85rem;
-            margin-bottom: 0.25rem;
         }
-
-        .arch-model-type {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
+        .arch-model-desc {
+            font-size: 0.75rem;
             color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.75rem;
         }
 
-        .arch-model-stats {
-            display: flex;
-            gap: 1rem;
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-        }
-
-        .arch-model-stat-value {
-            color: var(--accent);
-        }
-
-        /* --- COMPARISON TABLE --- */
-        .table-wrapper {
-            overflow-x: auto;
-            margin: var(--space-xl) 0;
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-            padding: 1.25rem 1.5rem;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .comparison-table th {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            background: rgba(0, 224, 84, 0.03);
-        }
-
-        .comparison-table tr:hover td {
-            background: rgba(255, 255, 255, 0.01);
-        }
-
-        .comparison-table .feature {
-            font-weight: 500;
-        }
-
-        .comparison-table .check {
-            color: var(--accent);
-            font-size: 1.25rem;
-        }
-
-        .comparison-table .cross {
-            color: var(--alert);
-            font-size: 1.25rem;
-        }
-
-        .comparison-table .partial {
-            color: var(--warning);
-            font-size: 1.25rem;
-        }
-
-        .comparison-highlight {
-            background: rgba(0, 224, 84, 0.03) !important;
-        }
-
-        /* --- CODE BLOCKS --- */
+        /* - CODE SECTIONS - */
         .code-wrapper {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
             margin: var(--space-xl) 0;
             overflow: hidden;
             position: relative;
         }
-
         .code-wrapper::before {
             content: '';
             position: absolute;
@@ -1228,13 +1162,11 @@
             background-size: 200% 100%;
             animation: gradient-shift 3s ease infinite;
         }
-
         @keyframes gradient-shift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
         .code-header {
             display: flex;
             justify-content: space-between;
@@ -1242,34 +1174,28 @@
             padding: var(--space-sm) var(--space-md);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-
         .code-header-left {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-
         .code-dots {
             display: flex;
             gap: 0.4rem;
         }
-
         .code-dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
         }
-
         .code-dot.red { background: #ff5f56; }
         .code-dot.yellow { background: #ffbd2e; }
         .code-dot.green { background: #27ca40; }
-
         .code-filename {
             font-family: var(--font-mono);
             font-size: 0.7rem;
             color: var(--text-muted);
         }
-
         .code-copy {
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1280,26 +1206,22 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .code-copy:hover {
             border-color: var(--accent);
             color: var(--accent);
         }
-
         .code-content {
             padding: var(--space-md);
             overflow-x: auto;
             max-height: 400px;
             overflow-y: auto;
         }
-
         .code-content pre {
             font-family: var(--font-mono);
             font-size: 0.75rem;
             line-height: 1.8;
             color: rgba(255, 255, 255, 0.85);
         }
-
         .code-content .keyword { color: #79c0ff; }
         .code-content .string { color: #a5d6ff; }
         .code-content .function { color: #d2a8ff; }
@@ -1307,13 +1229,12 @@
         .code-content .number { color: #7ee787; }
         .code-content .decorator { color: #ffa657; }
 
-        /* --- ROADMAP --- */
+        /* - ROADMAP - */
         .roadmap {
             position: relative;
             margin: var(--space-xl) 0;
             padding-left: 2rem;
         }
-
         .roadmap::before {
             content: '';
             position: absolute;
@@ -1323,13 +1244,11 @@
             width: 2px;
             background: linear-gradient(to bottom, var(--accent), var(--teal), var(--gray-medium));
         }
-
         .roadmap-item {
             position: relative;
             padding-bottom: var(--space-xl);
             padding-left: var(--space-lg);
         }
-
         .roadmap-item::before {
             content: '';
             position: absolute;
@@ -1341,87 +1260,38 @@
             background: var(--black);
             border: 2px solid var(--accent);
         }
-
         .roadmap-item.completed::before {
             background: var(--accent);
         }
-
         .roadmap-item.current::before {
+            background: var(--accent);
+            border-color: var(--accent);
             box-shadow: 0 0 0 4px rgba(0, 224, 84, 0.2);
-            animation: pulse 2s infinite;
         }
 
-        .roadmap-item.future::before {
-            border-color: var(--gray-medium);
-        }
-
-        .roadmap-phase {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .roadmap-title {
-            font-family: var(--font-editorial);
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
-        }
-
-        .roadmap-desc {
-            font-size: 0.9rem;
-            margin-bottom: var(--space-sm);
-        }
-
-        .roadmap-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .roadmap-feature {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            padding: 0.3rem 0.75rem;
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text-muted);
-        }
-
-        /* --- PRICING --- */
+        /* - PRICING - */
         .pricing-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--space-md);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
             margin-top: var(--space-xl);
         }
-
-        @media (min-width: 768px) {
-            .pricing-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
         .pricing-card {
             background: rgba(255, 255, 255, 0.01);
             border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
             padding: var(--space-xl);
+            text-align: center;
+            transition: all 0.3s ease;
             position: relative;
-            transition: all 0.4s var(--ease-out-expo);
         }
-
         .pricing-card:hover {
-            border-color: rgba(0, 224, 84, 0.3);
             transform: translateY(-4px);
         }
-
         .pricing-card.featured {
             border-color: var(--accent);
             background: rgba(0, 224, 84, 0.02);
         }
-
         .pricing-card.featured::before {
             content: 'POPULAR';
             position: absolute;
@@ -1436,36 +1306,30 @@
             font-weight: 700;
             letter-spacing: 0.05em;
         }
-
         .pricing-name {
             font-family: var(--font-editorial);
             font-size: 1.5rem;
             font-weight: 400;
             margin-bottom: 0.5rem;
         }
-
         .pricing-desc {
             font-size: 0.9rem;
             margin-bottom: var(--space-md);
         }
-
         .pricing-price {
             font-family: var(--font-editorial);
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 200;
-            margin-bottom: 0.5rem;
+            margin-bottom: var(--space-md);
         }
-
         .pricing-price span {
             font-size: 1rem;
             color: var(--text-muted);
         }
-
         .pricing-features {
             list-style: none;
             margin: var(--space-md) 0;
         }
-
         .pricing-features li {
             padding: 0.75rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -1474,13 +1338,11 @@
             gap: 0.75rem;
             font-size: 0.9rem;
         }
-
         .pricing-features li::before {
             content: '✓';
             color: var(--accent);
             font-weight: 700;
         }
-
         .pricing-cta {
             width: 100%;
             margin-top: var(--space-sm);
@@ -1488,102 +1350,65 @@
             justify-content: center;
         }
 
-        /* --- CTA SECTION --- */
+        /* - CTA SECTION - */
         .cta-section {
             background: var(--accent);
             color: var(--black);
             text-align: center;
         }
-
         .cta-section h2 {
             color: var(--black);
         }
-
         .cta-section p {
             color: rgba(0, 0, 0, 0.7);
             max-width: 600px;
             margin: 0 auto var(--space-lg);
         }
-
         .cta-actions {
             display: flex;
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
         }
-
         .cta-actions .btn-dark {
             background: var(--black);
             color: var(--white);
         }
-
         .cta-actions .btn-dark:hover {
             background: var(--gray-dark);
         }
-
         .cta-actions .btn-outline {
             background: transparent;
             color: var(--black);
             border: 2px solid var(--black);
         }
-
         .cta-actions .btn-outline:hover {
             background: rgba(0, 0, 0, 0.1);
         }
 
-        /* --- FOOTER --- */
-        footer {
-            padding: var(--space-2xl) 0 var(--space-lg);
+        /* - FOOTER - */
+        .footer {
             border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: var(--space-2xl) 0 var(--space-lg);
         }
-
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: var(--space-xl);
-            margin-bottom: var(--space-xl);
         }
-
         @media (max-width: 768px) {
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: var(--space-lg);
             }
         }
-
         .footer-brand {
             max-width: 300px;
         }
-
-        .footer-brand .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: var(--font-editorial);
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--white);
-            text-decoration: none;
-            margin-bottom: var(--space-sm);
-        }
-
-        .footer-brand .logo-icon {
-            width: 28px;
-            height: 28px;
-            background: var(--accent);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            color: var(--black);
-        }
-
         .footer-brand p {
             font-size: 0.9rem;
             margin-bottom: var(--space-sm);
         }
-
         .footer-title {
             font-family: var(--font-mono);
             font-size: 0.65rem;
@@ -1592,26 +1417,21 @@
             color: var(--text-muted);
             margin-bottom: var(--space-md);
         }
-
         .footer-links {
             list-style: none;
         }
-
         .footer-links li {
             margin-bottom: 0.75rem;
         }
-
         .footer-links a {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.3s ease;
         }
-
         .footer-links a:hover {
             color: var(--accent);
         }
-
         .footer-bottom {
             display: flex;
             justify-content: space-between;
@@ -1623,12 +1443,10 @@
             flex-wrap: wrap;
             gap: var(--space-sm);
         }
-
         .footer-social {
             display: flex;
             gap: 0.75rem;
         }
-
         .footer-social a {
             width: 36px;
             height: 36px;
@@ -1643,325 +1461,158 @@
             font-size: 0.7rem;
             transition: all 0.3s ease;
         }
-
         .footer-social a:hover {
             background: var(--accent);
             border-color: var(--accent);
             color: var(--black);
         }
 
-        /* --- REVEAL ANIMATIONS --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(60px);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 1.2s var(--ease-out-expo);
-        }
-
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
-
-        /* --- SCROLL INDICATOR --- */
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 2px;
-            background: var(--accent);
-            z-index: 9999;
-            transition: width 0.1s ease;
-        }
-
-        /* --- BACKGROUND VARIANTS --- */
-        .bg-dark {
-            background: #0a0a0a;
-        }
-
-        .bg-white {
-            background: var(--white);
-            color: var(--black);
-        }
-
-        .bg-white p {
-            color: rgba(0, 0, 0, 0.7);
-        }
-
-        .bg-white h2,
-        .bg-white h3,
-        .bg-white h4 {
-            color: var(--black);
-        }
-
-        .bg-white .section-label {
-            color: var(--accent);
-        }
-
-        .bg-white .section-label::before {
-            background: var(--accent);
-        }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            :root {
-                --gutter: 1.5rem;
-            }
-            
-            h1 {
-                line-height: 1;
-            }
-            
-            .hero-stats {
-                gap: var(--space-lg);
-            }
-        }
-
-        /* --- SCROLLBAR --- */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--gray-dark);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gray-medium);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
-        }
-
-        /* --- PRELOADER --- */
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--white);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 1s var(--ease-in-out-expo);
-            transform-origin: top;
-        }
-
-        .preloader.hidden {
-            transform: scaleY(0);
-        }
-
-        .preloader p {
-            color: var(--black);
-            font-family: var(--font-editorial);
-            font-size: 1.5rem;
-            font-weight: 300;
-            animation: pulse-fade 1s ease infinite;
-        }
-
-        @keyframes pulse-fade {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
+        /* - PULSE ANIMATION - */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
     </style>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Preloader -->
-    <div class="preloader" id="preloader">
-        <p>BanglaFinance AI</p>
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="loading-text">LOADING</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
     </div>
 
-    <!-- Scroll Progress -->
-    <div class="scroll-indicator" id="scrollIndicator"></div>
+    <!-- Scroll Indicator -->
+    <div id="scrollIndicator" class="scroll-indicator"></div>
 
     <!-- Navigation Island -->
     <nav class="nav-island">
+        <!-- Toggle Button -->
+        <input type="checkbox" id="nav-toggle-checkbox" class="nav-toggle-checkbox visually-hidden">
+        <label for="nav-toggle-checkbox" class="nav-toggle">☰</label> <!-- Or use an icon -->
+
         <a href="#" class="nav-logo">
-            <span class="nav-logo-icon">৳</span>
-            BanglaFinance
+            <span class="nav-logo-icon">M</span> <!-- Or another icon for M0NARQ -->
+            M0NARQ
         </a>
-        <a href="#problem">Problem</a>
-        <a href="#vision">Vision</a>
-        <a href="#demo">Demo</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#code">Code</a>
+
+        <!-- Hidden Menu List -->
+        <ul class="nav-menu-list">
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#vision">Vision</a></li>
+            <li><a href="#demo">Demo</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#code">Code</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <!-- Add more list items as needed -->
+        </ul>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-bg">
-            <div class="hero-grid"></div>
-        </div>
-        <div class="container hero-content">
-            <div class="hero-badge reveal">
-                <span class="hero-badge-dot"></span>
-                <span class="hero-badge-text">Live Demo Available</span>
+    <section class="hero bg-dark">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="container">
+            <div class="hero-content reveal">
+                <span class="hero-subtitle">AI-Powered Document Processing</span>
+                <h1 class="hero-title">Transforming Financial Operations</h1>
+                <p class="hero-description">Advanced AI solutions for real-time document analysis, validation, and data extraction, specifically designed for the Bangladeshi financial sector.</p>
+                <div class="hero-actions">
+                    <a href="#demo" class="btn btn-primary">Try Demo</a>
+                    <a href="#architecture" class="btn btn-secondary">View Architecture</a>
+                </div>
             </div>
-            
-            <h1 class="reveal reveal-delay-1">
-                AI That Reads<br>
-                <span class="highlight">Bangladesh</span>
-            </h1>
-            
-            <p class="hero-subtitle reveal reveal-delay-2">
-                From handwritten cheques to tax forms, we process every Bengali and English 
-                financial document with 99.5% accuracy.
-            </p>
-            
-            <div class="hero-actions reveal reveal-delay-3">
-                <a href="#demo" class="btn btn-primary">Try Live Demo</a>
-                <a href="#architecture" class="btn btn-secondary">View Architecture</a>
-            </div>
-            
-            <div class="hero-stats reveal reveal-delay-4">
-                <div class="hero-stat">
-                    <span class="hero-stat-value" data-value="99.5">99.5%</span>
-                    <span class="hero-stat-label">Accuracy</span>
+            <div class="hero-stats">
+                <div class="hero-stat reveal reveal-delay-1">
+                    <div class="hero-stat-value">99.2%</div>
+                    <div class="hero-stat-label">Accuracy Rate</div>
                 </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-value" data-value="2.3">&lt;2.5s</span>
-                    <span class="hero-stat-label">Processing</span>
+                <div class="hero-stat reveal reveal-delay-2">
+                    <div class="hero-stat-value">500ms</div>
+                    <div class="hero-stat-label">Avg. Processing Time</div>
                 </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-value">$0.002</span>
-                    <span class="hero-stat-label">Per Document</span>
+                <div class="hero-stat reveal reveal-delay-3">
+                    <div class="hero-stat-value">50x</div>
+                    <div class="hero-stat-label">Speed Increase</div>
                 </div>
-                <div class="hero-stat">
-                    <span class="hero-stat-value">🇧🇩</span>
-                    <span class="hero-stat-label">Made for BD</span>
+                <div class="hero-stat reveal reveal-delay-4">
+                    <div class="hero-stat-value">24/7</div>
+                    <div class="hero-stat-label">Availability</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Problem Section -->
-    <section id="problem" class="bg-dark">
+    <section id="problem">
         <div class="container">
-            <span class="section-label reveal">The Problem</span>
-            <h2 class="reveal reveal-delay-1">Why Bangladesh<br>Needs This</h2>
-            <p class="large-text reveal reveal-delay-2">
-                Every day, millions of financial documents are processed manually. 
-                The result? Errors, fraud, and billions lost.
-            </p>
-            
-            <div class="stat-grid reveal reveal-delay-3">
-                <div class="stat-item">
-                    <div class="stat-number">47M</div>
-                    <div class="stat-label">Cheques / Year</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">12%</div>
-                    <div class="stat-label">Error Rate</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">৳2100Cr</div>
-                    <div class="stat-label">Lost to Fraud</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">72h</div>
-                    <div class="stat-label">Avg Processing</div>
-                </div>
-            </div>
-            
+            <span class="section-label">PROBLEM</span>
+            <h2>Challenges in Financial Document Handling</h2>
+            <p>Traditional methods of processing financial documents in Bangladesh are plagued by inefficiencies, errors, and high operational costs.</p>
+
             <div class="problem-grid">
                 <div class="problem-card reveal">
-                    <div class="problem-icon">📝</div>
-                    <div class="problem-stat">85%</div>
-                    <h4>Manual Processing</h4>
-                    <p>Banks still rely on manual data entry, leading to high error rates and slow processing.</p>
+                    <div class="problem-icon">📄</div>
+                    <h3 class="problem-title">Manual Data Entry</h3>
+                    <p class="problem-description">Tedious and error-prone manual input of data from cheques, invoices, and other documents.</p>
+                    <div class="problem-stat">80%</div>
+                    <p>of errors originate from manual processes.</p>
                 </div>
                 <div class="problem-card reveal reveal-delay-1">
-                    <div class="problem-icon">🔤</div>
-                    <div class="problem-stat">2</div>
-                    <h4>Languages, No Solution</h4>
-                    <p>Bengali and English together. Existing OCR fails with mixed-language documents.</p>
+                    <div class="problem-icon">⏱️</div>
+                    <h3 class="problem-title">Processing Delays</h3>
+                    <p class="problem-description">Lengthy processing times leading to customer dissatisfaction and delayed settlements.</p>
+                    <div class="problem-stat">4-7 Days</div>
+                    <p>average processing time for complex documents.</p>
                 </div>
                 <div class="problem-card reveal reveal-delay-2">
-                    <div class="problem-icon">💰</div>
-                    <div class="problem-stat">৳50+</div>
-                    <h4>Cost Per Document</h4>
-                    <p>Including labor, errors, and fraud losses. We reduce this to under ৳1.</p>
+                    <div class="problem-icon">🔍</div>
+                    <h3 class="problem-title">Fraud Detection</h3>
+                    <p class="problem-description">Difficulty in identifying fraudulent documents and signatures using traditional methods.</p>
+                    <div class="problem-stat">2.3M BDT</div>
+                    <p>lost annually due to document fraud.</p>
                 </div>
                 <div class="problem-card reveal reveal-delay-3">
-                    <div class="problem-icon">🏛️</div>
-                    <div class="problem-stat">0</div>
-                    <h4>Data Sovereignty</h4>
-                    <p>Foreign clouds mean data leaves Bangladesh. No local AI solution exists.</p>
-                </div>
-                <div class="problem-card reveal reveal-delay-4">
-                    <div class="problem-icon">📱</div>
-                    <div class="problem-stat">Low</div>
-                    <h4>Mobile Quality</h4>
-                    <p>Field captures in poor lighting. Current systems can't handle real-world quality.</p>
-                </div>
-                <div class="problem-card reveal reveal-delay-5">
-                    <div class="problem-icon">🎭</div>
-                    <div class="problem-stat">Rising</div>
-                    <h4>Sophisticated Fraud</h4>
-                    <p>Simple OCR can't detect alterations, forgeries, or tampering.</p>
+                    <div class="problem-icon">📈</div>
+                    <h3 class="problem-title">Scalability Issues</h3>
+                    <p class="problem-description">Inability to efficiently scale operations to handle increasing transaction volumes.</p>
+                    <div class="problem-stat">+15%</div>
+                    <p>annual growth in document volume.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Vision Section -->
-    <section id="vision">
+    <section id="vision" class="bg-dark">
         <div class="container">
-            <span class="section-label reveal">The Vision</span>
-            <h2 class="reveal reveal-delay-1">Universal Financial<br>Document Intelligence</h2>
-            <p class="large-text reveal reveal-delay-2">
-                One AI platform for every financial document in Bangladesh.
-            </p>
-            
+            <span class="section-label">VISION</span>
+            <h2>Our Vision for Financial Automation</h2>
+            <p class="large-text">Leveraging cutting-edge AI to create a seamless, secure, and efficient financial ecosystem for Bangladesh.</p>
+
             <div class="doc-types-grid">
-                <div class="doc-type-card active reveal" data-doc="cheque">
-                    <div class="doc-type-icon">🏦</div>
-                    <div class="doc-type-name">Bank Cheques</div>
-                    <span class="doc-type-status live">Live Now</span>
+                <div class="doc-type-card reveal active" data-type="cheque">
+                    <div class="doc-type-icon">💰</div>
+                    <h3 class="doc-type-name">Cheques</h3>
+                    <span class="doc-type-status live">Live</span>
                 </div>
-                <div class="doc-type-card reveal reveal-delay-1" data-doc="pay-order">
-                    <div class="doc-type-icon">📋</div>
-                    <div class="doc-type-name">Pay Orders</div>
-                    <span class="doc-type-status coming">Q2 2025</span>
+                <div class="doc-type-card reveal" data-type="invoice">
+                    <div class="doc-type-icon">📝</div>
+                    <h3 class="doc-type-name">Invoices</h3>
+                    <span class="doc-type-status coming">Coming Soon</span>
                 </div>
-                <div class="doc-type-card reveal reveal-delay-2" data-doc="invoice">
+                <div class="doc-type-card reveal" data-type="bill">
                     <div class="doc-type-icon">🧾</div>
-                    <div class="doc-type-name">Invoices</div>
-                    <span class="doc-type-status coming">Q2 2025</span>
-                </div>
-                <div class="doc-type-card reveal reveal-delay-3" data-doc="bank-statement">
-                    <div class="doc-type-icon">📊</div>
-                    <div class="doc-type-name">Bank Statements</div>
-                    <span class="doc-type-status coming">Q3 2025</span>
-                </div>
-                <div class="doc-type-card reveal" data-doc="tax-form">
-                    <div class="doc-type-icon">🏛️</div>
-                    <div class="doc-type-name">Tax Forms</div>
+                    <h3 class="doc-type-name">Bills</h3>
                     <span class="doc-type-status planned">Planned</span>
                 </div>
-                <div class="doc-type-card reveal reveal-delay-1" data-doc="trade-license">
-                    <div class="doc-type-icon">📜</div>
-                    <div class="doc-type-name">Trade Licenses</div>
-                    <span class="doc-type-status planned">Planned</span>
-                </div>
-                <div class="doc-type-card reveal reveal-delay-2" data-doc="nid">
-                    <div class="doc-type-icon">🪪</div>
-                    <div class="doc-type-name">NID / Passport</div>
-                    <span class="doc-type-status planned">Planned</span>
-                </div>
-                <div class="doc-type-card reveal reveal-delay-3" data-doc="lc">
-                    <div class="doc-type-icon">🚢</div>
-                    <div class="doc-type-name">LC Documents</div>
+                <div class="doc-type-card reveal" data-type="contract">
+                    <div class="doc-type-icon">📋</div>
+                    <h3 class="doc-type-name">Contracts</h3>
                     <span class="doc-type-status planned">Planned</span>
                 </div>
             </div>
@@ -1969,352 +1620,181 @@
     </section>
 
     <!-- Demo Section -->
-    <section id="demo" class="bg-dark">
+    <section id="demo">
         <div class="container">
-            <span class="section-label reveal">Live Demo</span>
-            <h2 class="reveal reveal-delay-1">ChequeScan AI<br>In Action</h2>
-            <p class="large-text reveal reveal-delay-2">
-                Watch our AI process real Bangladesh bank cheques across challenging scenarios.
-            </p>
-        </div>
-        
-        <div class="container-wide">
-            <div class="demo-container reveal reveal-delay-3">
+            <span class="section-label">DEMO</span>
+            <h2>Real-Time Document Processing</h2>
+            <p>Experience our AI in action. Select a scenario and process a sample document.</p>
+
+            <div class="demo-container reveal">
                 <div class="demo-header">
-                    <div class="demo-tabs">
-                        <button class="demo-tab active" data-scenario="standard">Standard</button>
-                        <button class="demo-tab" data-scenario="blurry">Blurry</button>
-                        <button class="demo-tab" data-scenario="handwritten">Handwritten</button>
-                        <button class="demo-tab" data-scenario="low-light">Low Light</button>
-                        <button class="demo-tab" data-scenario="rotated">Rotated</button>
-                        <button class="demo-tab" data-scenario="bengali">Full Bengali</button>
-                    </div>
+                    <h3 class="demo-title">Cheque Processing Demo</h3>
                     <div class="demo-status">
-                        <span class="demo-status-dot"></span>
-                        <span>Gemini 2.0 + PaddleOCR</span>
+                        <div class="demo-status-dot"></div>
+                        <div class="demo-status-text">Live Processing</div>
                     </div>
                 </div>
-                
                 <div class="demo-body">
                     <div class="demo-input">
-                        <div id="chequePreview" class="cheque-container">
-                            <div class="scan-line"></div>
-                            
-                            <div class="field-highlight" style="top: 5%; right: 5%; width: 25%; height: 12%;"></div>
-                            <div class="field-highlight" style="top: 30%; left: 5%; width: 50%; height: 12%;"></div>
-                            <div class="field-highlight" style="top: 45%; left: 5%; width: 70%; height: 12%;"></div>
-                            <div class="field-highlight" style="top: 30%; right: 5%; width: 20%; height: 12%;"></div>
-                            <div class="field-highlight" style="bottom: 10%; left: 20%; width: 60%; height: 10%;"></div>
-                            
-                            <div class="cheque-bank-logo">
-                                <div>🏦 DUTCH-BANGLA BANK</div>
-                                <div class="cheque-bank-name">ডাচ-বাংলা ব্যাংক লিমিটেড</div>
-                            </div>
-                            
-                            <div class="cheque-field cheque-date" id="chequeDate">15/01/2025</div>
-                            <div class="cheque-field cheque-payee" id="chequePayee">Pay: <strong>Mohammad Rahman</strong></div>
-                            <div class="cheque-field cheque-amount-words" id="chequeAmountWords">Taka Fifty Thousand Only</div>
-                            <div class="cheque-field cheque-amount-fig" id="chequeAmountFig">৳ 50,000/-</div>
-                            <div class="cheque-field cheque-account" id="chequeAccount">A/C: 1234567890123</div>
-                            <div class="cheque-field cheque-micr" id="chequeMicr">⑆090270156⑆ ⑈1234567890123⑈ ⑇000042⑇</div>
-                            
-                            <div class="cheque-signature">
-                                <span class="cheque-signature-text" id="chequeSignature">M. Rahman</span>
-                            </div>
+                        <div class="cheque-container" id="chequePreview">
+                            <!-- Cheque content will be dynamically inserted here -->
                         </div>
-                        
                         <div style="margin-top: var(--space-md); display: flex; gap: 1rem;">
-                            <button class="btn btn-primary" id="processBtn" onclick="processDemo()">Process Cheque</button>
+                            <button id="processBtn" class="btn btn-primary" onclick="processDemo()">Process Cheque</button>
                             <button class="btn btn-secondary" onclick="resetDemo()">Reset</button>
                         </div>
                     </div>
-                    
                     <div class="demo-output">
                         <div class="output-section">
-                            <div class="output-title">
-                                <span>📤</span>
-                                Extracted Fields
-                            </div>
-                            <div class="output-fields" id="outputFields">
+                            <h4 class="output-title">Extracted Data</h4>
+                            <div class="output-fields">
                                 <div class="output-field">
-                                    <span class="output-field-label">Bank Name</span>
-                                    <span>
+                                    <span class="output-field-label">Bank</span>
+                                    <div>
                                         <span class="output-field-value" id="outBank">—</span>
                                         <span class="output-field-confidence" id="outBankConf">—</span>
-                                    </span>
+                                    </div>
                                 </div>
                                 <div class="output-field">
-                                    <span class="output-field-label">Account Number</span>
-                                    <span>
+                                    <span class="output-field-label">Account</span>
+                                    <div>
                                         <span class="output-field-value" id="outAccount">—</span>
                                         <span class="output-field-confidence" id="outAccountConf">—</span>
-                                    </span>
+                                    </div>
                                 </div>
                                 <div class="output-field">
-                                    <span class="output-field-label">Cheque Number</span>
-                                    <span>
+                                    <span class="output-field-label">Cheque #</span>
+                                    <div>
                                         <span class="output-field-value" id="outChequeNum">—</span>
                                         <span class="output-field-confidence" id="outChequeNumConf">—</span>
-                                    </span>
+                                    </div>
                                 </div>
                                 <div class="output-field">
                                     <span class="output-field-label">Date</span>
-                                    <span>
+                                    <div>
                                         <span class="output-field-value" id="outDate">—</span>
                                         <span class="output-field-confidence" id="outDateConf">—</span>
-                                    </span>
+                                    </div>
                                 </div>
                                 <div class="output-field">
-                                    <span class="output-field-label">Payee Name</span>
-                                    <span>
+                                    <span class="output-field-label">Payee</span>
+                                    <div>
                                         <span class="output-field-value" id="outPayee">—</span>
                                         <span class="output-field-confidence" id="outPayeeConf">—</span>
-                                    </span>
+                                    </div>
                                 </div>
                                 <div class="output-field">
-                                    <span class="output-field-label">Amount (Figures)</span>
-                                    <span>
+                                    <span class="output-field-label">Amount (Fig.)</span>
+                                    <div>
                                         <span class="output-field-value" id="outAmountFig">—</span>
                                         <span class="output-field-confidence" id="outAmountFigConf">—</span>
-                                    </span>
+                                    </div>
                                 </div>
                                 <div class="output-field">
                                     <span class="output-field-label">Amount (Words)</span>
-                                    <span>
+                                    <div>
                                         <span class="output-field-value" id="outAmountWords">—</span>
                                         <span class="output-field-confidence" id="outAmountWordsConf">—</span>
-                                    </span>
+                                    </div>
                                 </div>
                                 <div class="output-field">
-                                    <span class="output-field-label">MICR Code</span>
-                                    <span>
+                                    <span class="output-field-label">MICR</span>
+                                    <div>
                                         <span class="output-field-value" id="outMicr">—</span>
                                         <span class="output-field-confidence" id="outMicrConf">—</span>
-                                    </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div id="validationResult" class="validation-status valid" style="display: none;">
-                            <span class="validation-icon">✅</span>
-                            <div class="validation-text">
-                                <h4>Validation Passed</h4>
-                                <p id="validationMessage">All fields extracted successfully.</p>
+                        <div id="validationResult" class="validation-result" style="display: none;">
+                            <div class="validation-icon" id="validationIcon">✅</div>
+                            <div>
+                                <div class="validation-title" id="validationTitle">Validation Passed</div>
+                                <div class="validation-message" id="validationMessage">Document is valid.</div>
                             </div>
                         </div>
-                        
-                        <div style="margin-top: var(--space-md); padding: var(--space-sm); background: rgba(0,0,0,0.3);">
-                            <div style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em;">Processing Info</div>
-                            <div style="display: flex; gap: 2rem; font-size: 0.8rem;">
-                                <span>⏱️ <span id="procTime">—</span></span>
-                                <span>🤖 <span id="procModels">—</span></span>
-                                <span>📊 <span id="procQuality">—</span></span>
+                        <div class="proc-info">
+                            <div class="proc-info-item">
+                                <div class="proc-info-label">Time</div>
+                                <div class="proc-info-value" id="procTime">—</div>
+                            </div>
+                            <div class="proc-info-item">
+                                <div class="proc-info-label">Models</div>
+                                <div class="proc-info-value" id="procModels">—</div>
+                            </div>
+                            <div class="proc-info-item">
+                                <div class="proc-info-label">Quality</div>
+                                <div class="proc-info-value" id="procQuality">—</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Scenarios Section -->
-    <section>
-        <div class="container">
-            <span class="section-label reveal">Real-World Scenarios</span>
-            <h2 class="reveal reveal-delay-1">Handling The<br>Impossible</h2>
-            <p class="large-text reveal reveal-delay-2">
-                Bangladesh field conditions are harsh. Our AI handles what others can't.
-            </p>
-            
             <div class="scenarios-grid">
                 <div class="scenario-card reveal">
                     <div class="scenario-header">
                         <div class="scenario-title">
-                            <div class="scenario-icon">📷</div>
-                            <div>
-                                <h4>Blurry Mobile Capture</h4>
-                                <p style="font-size: 0.75rem; margin-bottom: 0;">Motion blur, focus issues</p>
-                            </div>
+                            <div class="scenario-icon">✅</div>
+                            <h3>Standard</h3>
                         </div>
-                        <span class="scenario-badge">Handled</span>
+                        <span class="scenario-badge">Default</span>
                     </div>
                     <div class="scenario-preview">
-                        <div class="scenario-cheque blurry">
-                            <div>🏦 BRAC BANK<br>Pay: Ahmed Ali<br>৳ 25,000/-</div>
-                        </div>
+                        <div class="scenario-cheque">Standard Cheque</div>
                     </div>
                     <div class="scenario-result">
                         <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Technique</span>
-                            <span style="color: var(--accent);">Multi-scale deblur + CLAHE</span>
+                            <span>Accuracy</span>
+                            <span>99.5%</span>
                         </div>
                         <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Accuracy</span>
-                            <span style="color: var(--accent);">94.2%</span>
-                        </div>
-                        <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Extra Time</span>
-                            <span>+0.8s</span>
+                            <span>Time</span>
+                            <span>450ms</span>
                         </div>
                     </div>
                 </div>
-                
                 <div class="scenario-card reveal reveal-delay-1">
                     <div class="scenario-header">
                         <div class="scenario-title">
-                            <div class="scenario-icon">🌙</div>
-                            <div>
-                                <h4>Low Light Conditions</h4>
-                                <p style="font-size: 0.75rem; margin-bottom: 0;">Dark rooms, shadows</p>
-                            </div>
+                            <div class="scenario-icon">📸</div>
+                            <h3>Low Quality</h3>
                         </div>
-                        <span class="scenario-badge">Handled</span>
+                        <span class="scenario-badge">Challenging</span>
                     </div>
                     <div class="scenario-preview">
-                        <div class="scenario-cheque dark">
-                            <div>🏦 CITY BANK<br>Pay: Fatima Khatun<br>৳ 100,000/-</div>
-                        </div>
+                        <div class="scenario-cheque blurry">Blurry Cheque</div>
                     </div>
                     <div class="scenario-result">
                         <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Technique</span>
-                            <span style="color: var(--accent);">Adaptive histogram + Gamma</span>
+                            <span>Accuracy</span>
+                            <span>97.2%</span>
                         </div>
                         <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Accuracy</span>
-                            <span style="color: var(--accent);">96.8%</span>
-                        </div>
-                        <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Extra Time</span>
-                            <span>+0.3s</span>
+                            <span>Time</span>
+                            <span>620ms</span>
                         </div>
                     </div>
                 </div>
-                
                 <div class="scenario-card reveal reveal-delay-2">
-                    <div class="scenario-header">
-                        <div class="scenario-title">
-                            <div class="scenario-icon">🔄</div>
-                            <div>
-                                <h4>Rotated / Skewed</h4>
-                                <p style="font-size: 0.75rem; margin-bottom: 0;">Angle up to ±45°</p>
-                            </div>
-                        </div>
-                        <span class="scenario-badge">Handled</span>
-                    </div>
-                    <div class="scenario-preview">
-                        <div class="scenario-cheque rotated">
-                            <div>🏦 SONALI BANK<br>Pay: Karim Uddin<br>৳ 75,000/-</div>
-                        </div>
-                    </div>
-                    <div class="scenario-result">
-                        <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Technique</span>
-                            <span style="color: var(--accent);">Hough transform + Deskew</span>
-                        </div>
-                        <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Accuracy</span>
-                            <span style="color: var(--accent);">98.1%</span>
-                        </div>
-                        <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Extra Time</span>
-                            <span>+0.2s</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="scenario-card reveal">
                     <div class="scenario-header">
                         <div class="scenario-title">
                             <div class="scenario-icon">✍️</div>
-                            <div>
-                                <h4>Handwritten Bengali</h4>
-                                <p style="font-size: 0.75rem; margin-bottom: 0;">Cursive, mixed scripts</p>
-                            </div>
+                            <h3>Handwritten</h3>
                         </div>
-                        <span class="scenario-badge">Handled</span>
+                        <span class="scenario-badge">Complex</span>
                     </div>
                     <div class="scenario-preview">
-                        <div class="scenario-cheque handwritten">
-                            <div>মোহাম্মদ আলী<br>টাকা পঁচিশ হাজার<br>২৫,০০০/-</div>
-                        </div>
+                        <div class="scenario-cheque handwritten">Pay: শ্রী মোহাম্মদ হাসান</div>
                     </div>
                     <div class="scenario-result">
                         <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Technique</span>
-                            <span style="color: var(--accent);">TrOCR + BanglaLekha</span>
+                            <span>Accuracy</span>
+                            <span>96.8%</span>
                         </div>
                         <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Accuracy</span>
-                            <span style="color: var(--accent);">91.5%</span>
-                        </div>
-                        <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Extra Time</span>
-                            <span>+1.2s</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="scenario-card reveal reveal-delay-1">
-                    <div class="scenario-header">
-                        <div class="scenario-title">
-                            <div class="scenario-icon">📄</div>
-                            <div>
-                                <h4>Damaged / Crumpled</h4>
-                                <p style="font-size: 0.75rem; margin-bottom: 0;">Folds, tears, stains</p>
-                            </div>
-                        </div>
-                        <span class="scenario-badge">Handled</span>
-                    </div>
-                    <div class="scenario-preview">
-                        <div class="scenario-cheque crumpled">
-                            <div>🏦 JANATA BANK<br>Pay: Rashida Begum<br>৳ 35,000/-</div>
-                        </div>
-                    </div>
-                    <div class="scenario-result">
-                        <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Technique</span>
-                            <span style="color: var(--accent);">Morphological + VLM</span>
-                        </div>
-                        <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Accuracy</span>
-                            <span style="color: var(--accent);">88.7%</span>
-                        </div>
-                        <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Extra Time</span>
-                            <span>+1.5s</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="scenario-card reveal reveal-delay-2">
-                    <div class="scenario-header">
-                        <div class="scenario-title">
-                            <div class="scenario-icon">✂️</div>
-                            <div>
-                                <h4>Partial Capture</h4>
-                                <p style="font-size: 0.75rem; margin-bottom: 0;">Cut-off edges</p>
-                            </div>
-                        </div>
-                        <span class="scenario-badge">Handled</span>
-                    </div>
-                    <div class="scenario-preview">
-                        <div class="scenario-cheque partial">
-                            <div>🏦 EASTERN BANK<br>Pay: Salam Miah<br>৳ 18,500/-</div>
-                        </div>
-                    </div>
-                    <div class="scenario-result">
-                        <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Technique</span>
-                            <span style="color: var(--accent);">Context inference</span>
-                        </div>
-                        <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Accuracy</span>
-                            <span style="color: var(--accent);">85.3%</span>
-                        </div>
-                        <div class="scenario-result-item">
-                            <span style="color: var(--text-muted);">Extra Time</span>
-                            <span>Flags review</span>
+                            <span>Time</span>
+                            <span>780ms</span>
                         </div>
                     </div>
                 </div>
@@ -2325,265 +1805,104 @@
     <!-- Architecture Section -->
     <section id="architecture" class="bg-dark">
         <div class="container">
-            <span class="section-label reveal">Technical Architecture</span>
-            <h2 class="reveal reveal-delay-1">Multi-Model<br>Intelligence Pipeline</h2>
-            <p class="large-text reveal reveal-delay-2">
-                A sophisticated ensemble of OCR engines, vision-language models, and 
-                Bangladesh-specific validators.
-            </p>
-            
+            <span class="section-label">ARCHITECTURE</span>
+            <h2>AI Processing Pipeline</h2>
+            <p>Our robust architecture ensures high performance, accuracy, and scalability.</p>
+
             <div class="architecture-flow">
-                <!-- Layer 1 -->
-                <div class="arch-layer reveal" data-layer="Layer 1">
-                    <div class="arch-layer-title">
-                        <div class="arch-layer-icon">📥</div>
-                        Input & Preprocessing
-                    </div>
-                    <p>Intelligent image preprocessing adapts to quality issues automatically</p>
+                <div class="arch-layer" data-layer="Input">
+                    <h3 class="arch-layer-title">
+                        <span class="arch-layer-icon">📥</span>
+                        Input Layer
+                    </h3>
+                    <p>Handles document ingestion via web interface, API, or batch uploads. Supports multiple formats (JPG, PNG, PDF).</p>
                     <div class="arch-models">
                         <div class="arch-model">
-                            <div class="arch-model-name">Quality Analyzer</div>
-                            <div class="arch-model-type">OpenCV + Custom</div>
-                            <div class="arch-model-stats">
-                                <span>Blur: <span class="arch-model-stat-value">Laplacian</span></span>
-                                <span>Speed: <span class="arch-model-stat-value">50ms</span></span>
-                            </div>
+                            <div class="arch-model-name">Web Interface</div>
+                            <div class="arch-model-desc">User-friendly UI</div>
                         </div>
                         <div class="arch-model">
-                            <div class="arch-model-name">Auto-Deskew</div>
-                            <div class="arch-model-type">Hough Transform</div>
-                            <div class="arch-model-stats">
-                                <span>Range: <span class="arch-model-stat-value">±45°</span></span>
-                                <span>Speed: <span class="arch-model-stat-value">80ms</span></span>
-                            </div>
-                        </div>
-                        <div class="arch-model">
-                            <div class="arch-model-name">Enhancement</div>
-                            <div class="arch-model-type">CLAHE + Bilateral</div>
-                            <div class="arch-model-stats">
-                                <span>Modes: <span class="arch-model-stat-value">6</span></span>
-                                <span>Speed: <span class="arch-model-stat-value">120ms</span></span>
-                            </div>
+                            <div class="arch-model-name">REST API</div>
+                            <div class="arch-model-desc">Programmatic access</div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Layer 2 -->
-                <div class="arch-layer reveal reveal-delay-1" data-layer="Layer 2">
-                    <div class="arch-layer-title">
-                        <div class="arch-layer-icon">👁️</div>
-                        Multi-Engine OCR
+                <div class="arch-layer" data-layer="Preprocessing">
+                    <h3 class="arch-layer-title">
+                        <span class="arch-layer-icon">⚙️</span>
+                        Preprocessing
+                    </h3>
+                    <p>Optimizes document images for analysis. Includes noise reduction, contrast adjustment, and skew correction.</p>
+                    <div class="arch-models">
+                        <div class="arch-model">
+                            <div class="arch-model-name">OpenCV</div>
+                            <div class="arch-model-desc">Image processing</div>
+                        </div>
                     </div>
-                    <p>Parallel OCR with confidence-weighted fusion for maximum accuracy</p>
+                </div>
+                <div class="arch-layer" data-layer="OCR & AI">
+                    <h3 class="arch-layer-title">
+                        <span class="arch-layer-icon">🤖</span>
+                        OCR & AI Analysis
+                    </h3>
+                    <p>Extracts text using PaddleOCR and analyzes content using multimodal AI models for context and validation.</p>
                     <div class="arch-models">
                         <div class="arch-model">
                             <div class="arch-model-name">PaddleOCR</div>
-                            <div class="arch-model-type">Primary Engine</div>
-                            <div class="arch-model-stats">
-                                <span>Acc: <span class="arch-model-stat-value">96%</span></span>
-                                <span>Speed: <span class="arch-model-stat-value">400ms</span></span>
-                            </div>
+                            <div class="arch-model-desc">Text extraction</div>
                         </div>
                         <div class="arch-model">
-                            <div class="arch-model-name">Tesseract 5</div>
-                            <div class="arch-model-type">Bengali Specialist</div>
-                            <div class="arch-model-stats">
-                                <span>Lang: <span class="arch-model-stat-value">ben+eng</span></span>
-                                <span>Speed: <span class="arch-model-stat-value">600ms</span></span>
-                            </div>
-                        </div>
-                        <div class="arch-model">
-                            <div class="arch-model-name">TrOCR</div>
-                            <div class="arch-model-type">Handwriting</div>
-                            <div class="arch-model-stats">
-                                <span>Type: <span class="arch-model-stat-value">Transformer</span></span>
-                                <span>Speed: <span class="arch-model-stat-value">800ms</span></span>
-                            </div>
-                        </div>
-                        <div class="arch-model">
-                            <div class="arch-model-name">OCR Fusion</div>
-                            <div class="arch-model-type">Ensemble</div>
-                            <div class="arch-model-stats">
-                                <span>Method: <span class="arch-model-stat-value">Weighted</span></span>
-                                <span>Boost: <span class="arch-model-stat-value">+3.2%</span></span>
-                            </div>
+                            <div class="arch-model-name">Gemini Pro</div>
+                            <div class="arch-model-desc">Context analysis</div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Layer 3 -->
-                <div class="arch-layer reveal reveal-delay-2" data-layer="Layer 3">
-                    <div class="arch-layer-title">
-                        <div class="arch-layer-icon">🧠</div>
-                        Vision-Language Intelligence
-                    </div>
-                    <p>State-of-the-art VLMs understand document context, not just text</p>
+                <div class="arch-layer" data-layer="Validation">
+                    <h3 class="arch-layer-title">
+                        <span class="arch-layer-icon">✅</span>
+                        Validation
+                    </h3>
+                    <p>Cross-references extracted data against known formats and databases to ensure accuracy and flag anomalies.</p>
                     <div class="arch-models">
                         <div class="arch-model">
-                            <div class="arch-model-name">Gemini 2.0 Flash</div>
-                            <div class="arch-model-type">Primary VLM</div>
-                            <div class="arch-model-stats">
-                                <span>Acc: <span class="arch-model-stat-value">98.5%</span></span>
-                                <span>Cost: <span class="arch-model-stat-value">Free*</span></span>
-                            </div>
+                            <div class="arch-model-name">Rule Engine</div>
+                            <div class="arch-model-desc">Format checks</div>
                         </div>
                         <div class="arch-model">
-                            <div class="arch-model-name">Qwen-VL 7B</div>
-                            <div class="arch-model-type">Fallback</div>
-                            <div class="arch-model-stats">
-                                <span>Acc: <span class="arch-model-stat-value">94.2%</span></span>
-                                <span>Cost: <span class="arch-model-stat-value">Free</span></span>
-                            </div>
-                        </div>
-                        <div class="arch-model">
-                            <div class="arch-model-name">GPT-4V</div>
-                            <div class="arch-model-type">Premium</div>
-                            <div class="arch-model-stats">
-                                <span>Acc: <span class="arch-model-stat-value">99.1%</span></span>
-                                <span>Cost: <span class="arch-model-stat-value">$0.01</span></span>
-                            </div>
-                        </div>
-                        <div class="arch-model">
-                            <div class="arch-model-name">BanglaDocVL</div>
-                            <div class="arch-model-type">Future</div>
-                            <div class="arch-model-stats">
-                                <span>Acc: <span class="arch-model-stat-value">99.5%</span></span>
-                                <span>Local: <span class="arch-model-stat-value">Yes</span></span>
-                            </div>
+                            <div class="arch-model-name">Database</div>
+                            <div class="arch-model-desc">Reference data</div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Layer 4 -->
-                <div class="arch-layer reveal reveal-delay-3" data-layer="Layer 4">
-                    <div class="arch-layer-title">
-                        <div class="arch-layer-icon">✅</div>
-                        Bangladesh Validation
-                    </div>
-                    <p>Deep knowledge of Bangladesh banking rules, formats, and fraud patterns</p>
+                <div class="arch-layer" data-layer="Output">
+                    <h3 class="arch-layer-title">
+                        <span class="arch-layer-icon">📤</span>
+                        Output
+                    </h3>
+                    <p>Delivers structured data via API or UI, with confidence scores and validation status.</p>
                     <div class="arch-models">
                         <div class="arch-model">
-                            <div class="arch-model-name">Bank Validator</div>
-                            <div class="arch-model-type">62 Banks</div>
-                            <div class="arch-model-stats">
-                                <span>Routes: <span class="arch-model-stat-value">10K+</span></span>
-                                <span>Update: <span class="arch-model-stat-value">Weekly</span></span>
-                            </div>
+                            <div class="arch-model-name">JSON API</div>
+                            <div class="arch-model-desc">Structured output</div>
                         </div>
                         <div class="arch-model">
-                            <div class="arch-model-name">Amount Matcher</div>
-                            <div class="arch-model-type">Fig↔Words↔বাংলা</div>
-                            <div class="arch-model-stats">
-                                <span>Formats: <span class="arch-model-stat-value">12</span></span>
-                                <span>Acc: <span class="arch-model-stat-value">99.9%</span></span>
-                            </div>
-                        </div>
-                        <div class="arch-model">
-                            <div class="arch-model-name">MICR Decoder</div>
-                            <div class="arch-model-type">E13B / CMC7</div>
-                            <div class="arch-model-stats">
-                                <span>Checksum: <span class="arch-model-stat-value">Yes</span></span>
-                                <span>Acc: <span class="arch-model-stat-value">99.7%</span></span>
-                            </div>
-                        </div>
-                        <div class="arch-model">
-                            <div class="arch-model-name">Fraud Detector</div>
-                            <div class="arch-model-type">ML + Rules</div>
-                            <div class="arch-model-stats">
-                                <span>Patterns: <span class="arch-model-stat-value">47</span></span>
-                                <span>FPR: <span class="arch-model-stat-value">&lt;0.1%</span></span>
-                            </div>
+                            <div class="arch-model-name">Dashboard</div>
+                            <div class="arch-model-desc">Human review</div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Comparison Section -->
-    <section>
-        <div class="container">
-            <span class="section-label reveal">Why Us</span>
-            <h2 class="reveal reveal-delay-1">BanglaFinance vs<br>Alternatives</h2>
-            
-            <div class="table-wrapper reveal reveal-delay-2">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th class="comparison-highlight">BanglaFinance AI</th>
-                            <th>Google Cloud Vision</th>
-                            <th>AWS Textract</th>
-                            <th>Manual</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="feature">Bengali Recognition</td>
-                            <td class="comparison-highlight"><span class="check">✓</span> Native</td>
-                            <td><span class="partial">◐</span> Limited</td>
-                            <td><span class="cross">✗</span> Poor</td>
-                            <td><span class="check">✓</span> Human</td>
-                        </tr>
-                        <tr>
-                            <td class="feature">Bangladesh Banks</td>
-                            <td class="comparison-highlight"><span class="check">✓</span> 62 Banks</td>
-                            <td><span class="cross">✗</span> Generic</td>
-                            <td><span class="cross">✗</span> Generic</td>
-                            <td><span class="check">✓</span> Manual</td>
-                        </tr>
-                        <tr>
-                            <td class="feature">MICR Decoding</td>
-                            <td class="comparison-highlight"><span class="check">✓</span> Full</td>
-                            <td><span class="cross">✗</span> No</td>
-                            <td><span class="partial">◐</span> Basic</td>
-                            <td><span class="partial">◐</span> Slow</td>
-                        </tr>
-                        <tr>
-                            <td class="feature">Fraud Detection</td>
-                            <td class="comparison-highlight"><span class="check">✓</span> AI</td>
-                            <td><span class="cross">✗</span> No</td>
-                            <td><span class="cross">✗</span> No</td>
-                            <td><span class="partial">◐</span> Limited</td>
-                        </tr>
-                        <tr>
-                            <td class="feature">Data Sovereignty</td>
-                            <td class="comparison-highlight"><span class="check">✓</span> BD Option</td>
-                            <td><span class="cross">✗</span> US</td>
-                            <td><span class="cross">✗</span> US</td>
-                            <td><span class="check">✓</span> Local</td>
-                        </tr>
-                        <tr>
-                            <td class="feature">Cost / Document</td>
-                            <td class="comparison-highlight" style="color: var(--accent);">$0.002</td>
-                            <td>$0.015</td>
-                            <td>$0.015</td>
-                            <td>$0.50+</td>
-                        </tr>
-                        <tr>
-                            <td class="feature">Accuracy (BD)</td>
-                            <td class="comparison-highlight" style="color: var(--accent);">99.5%</td>
-                            <td>~75%</td>
-                            <td>~70%</td>
-                            <td>~88%</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </section>
 
     <!-- Code Section -->
-    <section id="code" class="bg-dark">
+    <section id="code">
         <div class="container">
-            <span class="section-label reveal">Implementation</span>
-            <h2 class="reveal reveal-delay-1">Production-Ready<br>Code</h2>
-            <p class="large-text reveal reveal-delay-2">
-                Deploy in minutes with Modal.com. Full source available.
-            </p>
-            
-            <!-- Quick Start -->
-            <div class="code-wrapper reveal reveal-delay-3">
+            <span class="section-label">CODE</span>
+            <h2>Implementation Example</h2>
+            <p>See how our solution can be integrated into your systems using our API and deployment scripts.</p>
+
+            <div class="code-wrapper reveal">
                 <div class="code-header">
                     <div class="code-header-left">
                         <div class="code-dots">
@@ -2596,22 +1915,18 @@
                     <button class="code-copy" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-content">
-<pre><span class="comment"># 1. Install Modal CLI</span>
+                    <pre><span class="comment"># 1. Install Modal CLI</span>
 pip install modal
-
 <span class="comment"># 2. Authenticate</span>
 modal token new
-
 <span class="comment"># 3. Create secrets</span>
 modal secret create google-secret GOOGLE_API_KEY=your_key
-
 <span class="comment"># 4. Deploy</span>
 modal deploy chequescan.py
-
 <span class="comment"># Access: https://your-user--chequescan-web.modal.run</span></pre>
                 </div>
             </div>
-            
+
             <!-- Main Code -->
             <div class="code-wrapper reveal">
                 <div class="code-header">
@@ -2626,7 +1941,7 @@ modal deploy chequescan.py
                     <button class="code-copy" onclick="copyCode(this)">Copy</button>
                 </div>
                 <div class="code-content">
-<pre><span class="keyword">import</span> modal
+                    <pre><span class="keyword">import</span> modal
 <span class="keyword">import</span> io, json, re, time
 
 app = modal.App(<span class="string">"chequescan-ai"</span>)
@@ -2638,150 +1953,123 @@ image = (
 )
 
 BANGLADESH_BANKS = {
-    <span class="string">"dutch_bangla"</span>: {<span class="string">"code"</span>: <span class="string">"090"</span>, <span class="string">"patterns"</span>: [<span class="string">"dbbl"</span>, <span class="string">"ডাচ-বাংলা"</span>]},
-    <span class="string">"brac"</span>: {<span class="string">"code"</span>: <span class="string">"060"</span>, <span class="string">"patterns"</span>: [<span class="string">"brac"</span>, <span class="string">"ব্র্যাক"</span>]},
-    <span class="comment"># ... 60 more banks</span>
+    <span class="string">"IFIC Bank"</span>: {<span class="string">"code"</span>: <span class="string">"IFIC"</span>, <span class="string">"swift"</span>: <span class="string">"IFICBDDH"</span>},
+    <span class="string">"City Bank"</span>: {<span class="string">"code"</span>: <span class="string">"CITY"</span>, <span class="string">"swift"</span>: <span class="string">"CITYBDDH"</span>},
+    <span class="comment"># ... more banks</span>
 }
 
-<span class="decorator">@app.cls</span>(image=image, secrets=[modal.Secret.from_name(<span class="string">"google-secret"</span>)])
-<span class="keyword">class</span> <span class="function">ChequeScan</span>:
-    
-    <span class="decorator">@modal.enter</span>()
-    <span class="keyword">def</span> <span class="function">setup</span>(self):
-        <span class="keyword">import</span> google.generativeai <span class="keyword">as</span> genai
+<span class="keyword">class</span> <span class="function">ChequeProcessor</span>(modal.cls(image=image)):
+    <span class="keyword">def</span> __enter__(<span class="keyword">self</span>):
         <span class="keyword">from</span> paddleocr <span class="keyword">import</span> PaddleOCR
-        
-        genai.configure(api_key=os.environ[<span class="string">"GOOGLE_API_KEY"</span>])
-        self.gemini = genai.GenerativeModel(<span class="string">'gemini-2.0-flash-exp'</span>)
-        self.ocr = PaddleOCR(lang=<span class="string">'en'</span>, use_gpu=<span class="keyword">False</span>)
-    
-    <span class="decorator">@modal.method</span>()
-    <span class="keyword">def</span> <span class="function">process</span>(self, image_bytes: bytes) -> dict:
-        <span class="keyword">from</span> PIL <span class="keyword">import</span> Image
-        
+        <span class="keyword">import</span> google.generativeai <span class="keyword">as</span> genai
+        <span class="keyword">self</span>.ocr = PaddleOCR(use_angle_cls=<span class="keyword">True</span>, lang=<span class="string">'en'</span>, ocr_version=<span class="string">'PP-OCRv4'</span>)
+        genai.configure(api_key=modal.secret.from_name(<span class="string">"google-secret"</span>))
+        <span class="keyword">self</span>.gemini = genai.GenerativeModel(<span class="string">'gemini-pro-vision'</span>)
+
+    <span class="decorator">@modal.method()</span>
+    <span class="keyword">def</span> <span class="function">process</span>(<span class="keyword">self</span>, image_bytes: bytes):
         image = Image.open(io.BytesIO(image_bytes))
-        
-        <span class="comment"># OCR extraction</span>
-        ocr_result = self.ocr.ocr(np.array(image))
+        ocr_result = <span class="keyword">self</span>.ocr.ocr(image, cls=<span class="keyword">True</span>)
         text = <span class="string">" "</span>.join([l[<span class="number">1</span>][<span class="number">0</span>] <span class="keyword">for</span> l <span class="keyword">in</span> ocr_result[<span class="number">0</span>]])
-        
+
         <span class="comment"># VLM analysis</span>
         prompt = <span class="string">f"Extract from Bangladesh cheque: {text[:500]}"</span>
-        response = self.gemini.generate_content([prompt, image])
-        
-        <span class="keyword">return</span> json.loads(re.search(<span class="string">r'\{.*\}'</span>, response.text).group())</pre>
+        response = <span class="keyword">self</span>.gemini.generate_content([prompt, image])
+        <span class="keyword">return</span> json.loads(re.search(<span class="string">r'\{.*\}'</span>, response.text).group())
+</pre>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Roadmap Section -->
-    <section id="roadmap">
+    <section id="roadmap" class="bg-dark">
         <div class="container">
-            <span class="section-label reveal">Roadmap</span>
-            <h2 class="reveal reveal-delay-1">Building<br>The Future</h2>
-            
-            <div class="roadmap reveal reveal-delay-2">
+            <span class="section-label">ROADMAP</span>
+            <h2>Development Journey</h2>
+            <p>Track our progress and upcoming features.</p>
+
+            <div class="roadmap">
                 <div class="roadmap-item completed">
-                    <div class="roadmap-phase">Phase 1 — Now</div>
-                    <div class="roadmap-title">ChequeScan MVP</div>
-                    <div class="roadmap-desc">Core cheque processing with multi-model ensemble. Live demo available today.</div>
-                    <div class="roadmap-features">
-                        <span class="roadmap-feature">✓ Cheque extraction</span>
-                        <span class="roadmap-feature">✓ Bengali OCR</span>
-                        <span class="roadmap-feature">✓ Gemini VLM</span>
-                        <span class="roadmap-feature">✓ Web UI + API</span>
-                    </div>
+                    <h3>Q1 2024: Core OCR</h3>
+                    <p>Implemented basic text extraction for standard cheques.</p>
                 </div>
-                
+                <div class="roadmap-item completed">
+                    <h3>Q2 2024: Multimodal AI</h3>
+                    <p>Integrated Gemini Pro Vision for contextual understanding.</p>
+                </div>
+                <div class="roadmap-item completed">
+                    <h3>Q3 2024: Validation Engine</h3>
+                    <p>Added rule-based validation and fraud detection.</p>
+                </div>
                 <div class="roadmap-item current">
-                    <div class="roadmap-phase">Phase 2 — Q2 2025</div>
-                    <div class="roadmap-title">Multi-Document</div>
-                    <div class="roadmap-desc">Pay orders, invoices, and enhanced fraud detection.</div>
-                    <div class="roadmap-features">
-                        <span class="roadmap-feature">Pay orders/DD</span>
-                        <span class="roadmap-feature">Invoice parsing</span>
-                        <span class="roadmap-feature">ML fraud detection</span>
-                        <span class="roadmap-feature">Batch processing</span>
-                    </div>
+                    <h3>Q4 2024: API & Dashboard</h3>
+                    <p>Developing REST API and user dashboard for integration.</p>
                 </div>
-                
-                <div class="roadmap-item future">
-                    <div class="roadmap-phase">Phase 3 — Q3-Q4 2025</div>
-                    <div class="roadmap-title">Enterprise</div>
-                    <div class="roadmap-desc">Bank statements, tax forms, on-premise deployment.</div>
-                    <div class="roadmap-features">
-                        <span class="roadmap-feature">Bank statements</span>
-                        <span class="roadmap-feature">Tax forms (NBR)</span>
-                        <span class="roadmap-feature">On-premise</span>
-                        <span class="roadmap-feature">Core banking</span>
-                    </div>
+                <div class="roadmap-item">
+                    <h3>Q1 2025: Invoice Processing</h3>
+                    <p>Extending capabilities to handle invoices and bills.</p>
                 </div>
-                
-                <div class="roadmap-item future">
-                    <div class="roadmap-phase">Phase 4 — 2026</div>
-                    <div class="roadmap-title">BanglaDocVL</div>
-                    <div class="roadmap-desc">Custom fine-tuned VLM. Complete financial document ecosystem.</div>
-                    <div class="roadmap-features">
-                        <span class="roadmap-feature">BanglaDocVL model</span>
-                        <span class="roadmap-feature">LC documents</span>
-                        <span class="roadmap-feature">Mobile SDK</span>
-                        <span class="roadmap-feature">White-label</span>
-                    </div>
+                <div class="roadmap-item">
+                    <h3>Q2 2025: Multi-Language</h3>
+                    <p>Adding support for Bengali text processing.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing Section -->
-    <section class="bg-dark">
+    <section id="pricing">
         <div class="container">
-            <span class="section-label reveal">Pricing</span>
-            <h2 class="reveal reveal-delay-1">Simple,<br>Transparent</h2>
-            
+            <span class="section-label">PRICING</span>
+            <h2>Simple, Transparent Plans</h2>
+            <p>Choose the plan that fits your document processing needs.</p>
+
             <div class="pricing-grid">
-                <div class="pricing-card reveal">
-                    <div class="pricing-name">Developer</div>
-                    <div class="pricing-desc">For testing and small projects</div>
+                <div class="pricing-card">
+                    <h3 class="pricing-name">Starter</h3>
+                    <p class="pricing-desc">Perfect for small businesses and startups.</p>
                     <div class="pricing-price">$0<span>/month</span></div>
                     <ul class="pricing-features">
-                        <li>100 documents/month</li>
-                        <li>Cheque processing</li>
-                        <li>Web UI access</li>
-                        <li>REST API</li>
-                        <li>Community support</li>
+                        <li>1,000 Processed Documents</li>
+                        <li>Basic Accuracy (95%)</li>
+                        <li>Email Support</li>
+                        <li>Standard API Access</li>
                     </ul>
-                    <a href="#demo" class="btn btn-secondary pricing-cta">Start Free</a>
+                    <div class="pricing-cta">
+                        <a href="#" class="btn btn-outline">Get Started</a>
+                    </div>
                 </div>
-                
-                <div class="pricing-card featured reveal reveal-delay-1">
-                    <div class="pricing-name">Business</div>
-                    <div class="pricing-desc">For growing businesses</div>
-                    <div class="pricing-price">$99<span>/month</span></div>
+                <div class="pricing-card featured">
+                    <h3 class="pricing-name">Professional</h3>
+                    <p class="pricing-desc">For growing businesses with higher volumes.</p>
+                    <div class="pricing-price">$49<span>/month</span></div>
                     <ul class="pricing-features">
-                        <li>10,000 documents/month</li>
-                        <li>All document types</li>
-                        <li>Priority processing</li>
-                        <li>Webhooks</li>
-                        <li>Email support</li>
-                        <li>99.5% SLA</li>
+                        <li>10,000 Processed Documents</li>
+                        <li>High Accuracy (99%)</li>
+                        <li>Priority Support</li>
+                        <li>Advanced API Access</li>
+                        <li>Basic Analytics</li>
                     </ul>
-                    <a href="#demo" class="btn btn-primary pricing-cta">Get Started</a>
+                    <div class="pricing-cta">
+                        <a href="#" class="btn btn-primary">Choose Plan</a>
+                    </div>
                 </div>
-                
-                <div class="pricing-card reveal reveal-delay-2">
-                    <div class="pricing-name">Enterprise</div>
-                    <div class="pricing-desc">For large organizations</div>
+                <div class="pricing-card">
+                    <h3 class="pricing-name">Enterprise</h3>
+                    <p class="pricing-desc">For large institutions with custom needs.</p>
                     <div class="pricing-price">Custom</div>
                     <ul class="pricing-features">
-                        <li>Unlimited documents</li>
-                        <li>On-premise option</li>
-                        <li>Custom training</li>
-                        <li>Core banking integration</li>
-                        <li>Dedicated support</li>
-                        <li>99.99% SLA</li>
+                        <li>Unlimited Documents</li>
+                        <li>Premium Accuracy (99.5%)</li>
+                        <li>24/7 Dedicated Support</li>
+                        <li>Custom API & Integrations</li>
+                        <li>Advanced Analytics & Reporting</li>
+                        <li>On-Premise Options</li>
                     </ul>
-                    <a href="#demo" class="btn btn-secondary pricing-cta">Contact Sales</a>
+                    <div class="pricing-cta">
+                        <a href="#" class="btn btn-outline">Contact Sales</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2789,277 +2077,93 @@ BANGLADESH_BANKS = {
 
     <!-- CTA Section -->
     <section class="cta-section">
-        <div class="container" style="text-align: center;">
-            <h2 class="reveal">Ready to Transform<br>Document Processing?</h2>
-            <p class="reveal reveal-delay-1">
-                Join Bangladesh's leading banks and businesses using BanglaFinance AI.
-            </p>
-            <div class="cta-actions reveal reveal-delay-2">
-                <a href="#demo" class="btn btn-dark">Try Live Demo</a>
-                <a href="mailto:hello@banglafinance.ai" class="btn btn-outline">Contact Us</a>
+        <div class="container">
+            <h2>Ready to Transform Your Operations?</h2>
+            <p>Join leading financial institutions leveraging our AI for faster, more accurate document processing.</p>
+            <div class="cta-actions">
+                <a href="#demo" class="btn btn-dark">Try the Demo</a>
+                <a href="#contact" class="btn btn-outline">Contact Us</a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="logo">
-                        <span class="logo-icon">৳</span>
-                        BanglaFinance AI
+                    <a href="#" class="nav-logo">
+                        <span class="nav-logo-icon">M</span>
+                        M0NARQ
                     </a>
-                    <p>AI-powered financial document processing built for Bangladesh.</p>
-                    <p style="font-family: var(--font-bengali);">🇧🇩 বাংলাদেশের জন্য তৈরি</p>
+                    <p>AI-powered document processing for the modern financial sector.</p>
                 </div>
-                
-                <div>
-                    <div class="footer-title">Product</div>
-                    <ul class="footer-links">
-                        <li><a href="#demo">Live Demo</a></li>
-                        <li><a href="#architecture">Architecture</a></li>
-                        <li><a href="#code">Documentation</a></li>
+                <div class="footer-links">
+                    <h4 class="footer-title">Product</h4>
+                    <ul>
+                        <li><a href="#demo">Demo</a></li>
+                        <li><a href="#features">Features</a></li>
                         <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#docs">Documentation</a></li>
                     </ul>
                 </div>
-                
-                <div>
-                    <div class="footer-title">Documents</div>
-                    <ul class="footer-links">
-                        <li><a href="#">Bank Cheques</a></li>
-                        <li><a href="#">Pay Orders</a></li>
-                        <li><a href="#">Invoices</a></li>
-                        <li><a href="#">Tax Forms</a></li>
+                <div class="footer-links">
+                    <h4 class="footer-title">Company</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                
-                <div>
-                    <div class="footer-title">Company</div>
-                    <ul class="footer-links">
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Privacy</a></li>
-                    </ul>
+                <div class="footer-links">
+                    <h4 class="footer-title">Connect</h4>
+                    <div class="footer-social">
+                        <a href="#">TW</a>
+                        <a href="#">GH</a>
+                        <a href="#">IN</a>
+                        <a href="#">FB</a>
+                    </div>
                 </div>
             </div>
-            
             <div class="footer-bottom">
-                <p>© 2025 BanglaFinance AI. All rights reserved.</p>
-                <div class="footer-social">
-                    <a href="#">GH</a>
-                    <a href="#">LI</a>
-                    <a href="#">X</a>
+                <div>&copy; 2024 M0NARQ. All rights reserved.</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
-        <!-- JavaScript -->
     <script>
-        // ============================================
-        // PRELOADER - FIXED
-        // ============================================
+        // PRELOADER LOGIC
         function hidePreloader() {
             const preloader = document.getElementById('preloader');
             if (preloader) {
-                preloader.classList.add('hidden');
-                // Remove from DOM after animation completes
+                preloader.style.opacity = '0';
                 setTimeout(() => {
                     preloader.style.display = 'none';
-                    // Trigger reveal check after preloader is gone
-                    checkReveals();
-                }, 1000);
+                }, 600); // Match the CSS transition duration
             }
         }
 
-        // Hide preloader when page is fully loaded
-        window.addEventListener('load', () => {
-            setTimeout(hidePreloader, 500);
-        });
-
-        // Fallback: Hide preloader after max 3 seconds even if load event issues
+        // Simulate window load event for demonstration
+        // In a real scenario, remove the setTimeout and rely on window.addEventListener('load', ...)
+        window.addEventListener('load', hidePreloader);
+        // Fallback: Hide preloader after 3 seconds regardless of load state
         setTimeout(hidePreloader, 3000);
 
-        // ============================================
-        // DEMO DATA
-        // ============================================
-        const scenarios = {
-            standard: {
-                chequeClass: '',
-                bankLogo: '🏦 DUTCH-BANGLA BANK',
-                bankNameBn: 'ডাচ-বাংলা ব্যাংক লিমিটেড',
-                date: '15/01/2025',
-                payee: 'Mohammad Rahman',
-                amountWords: 'Taka Fifty Thousand Only',
-                amountFig: '৳ 50,000/-',
-                account: '1234567890123',
-                micr: '⑆090270156⑆ ⑈1234567890123⑈ ⑇000042⑇',
-                signature: 'M. Rahman',
-                result: {
-                    bank: { value: 'Dutch-Bangla Bank Limited', conf: 98 },
-                    account: { value: '1234567890123', conf: 99 },
-                    chequeNum: { value: '000042', conf: 97 },
-                    date: { value: '15/01/2025', conf: 99 },
-                    payee: { value: 'Mohammad Rahman', conf: 96 },
-                    amountFig: { value: '৳50,000', conf: 99 },
-                    amountWords: { value: 'Fifty Thousand Only', conf: 94 },
-                    micr: { value: '090270156-1234567890123-000042', conf: 98 }
-                },
-                validation: { valid: true, message: 'All fields extracted. Amounts match.' },
-                time: 1847,
-                models: 'Gemini 2.0 + PaddleOCR',
-                quality: 'Grade A'
-            },
-            blurry: {
-                chequeClass: 'blurry',
-                bankLogo: '🏦 BRAC BANK',
-                bankNameBn: 'ব্র্যাক ব্যাংক',
-                date: '22/01/2025',
-                payee: 'Ahmed Ali',
-                amountWords: 'Twenty Five Thousand Only',
-                amountFig: '৳ 25,000/-',
-                account: '9876543210987',
-                micr: '⑆060150234⑆ ⑈9876543210987⑈ ⑇000108⑇',
-                signature: 'A. Ali',
-                result: {
-                    bank: { value: 'BRAC Bank Limited', conf: 89 },
-                    account: { value: '9876543210987', conf: 85 },
-                    chequeNum: { value: '000108', conf: 82 },
-                    date: { value: '22/01/2025', conf: 91 },
-                    payee: { value: 'Ahmed Ali', conf: 87 },
-                    amountFig: { value: '৳25,000', conf: 94 },
-                    amountWords: { value: 'Twenty Five Thousand', conf: 79 },
-                    micr: { value: '060150234-9876543210987-000108', conf: 76 }
-                },
-                validation: { valid: true, message: 'Deblurring applied. Lower confidence on some fields.' },
-                time: 2634,
-                models: 'Gemini 2.0 + Deblur',
-                quality: 'Grade C → B'
-            },
-            handwritten: {
-                chequeClass: '',
-                bankLogo: '🏦 সোনালী ব্যাংক',
-                bankNameBn: 'Sonali Bank Limited',
-                date: '১০/০১/২০২৫',
-                payee: 'কামাল হোসেন',
-                amountWords: 'টাকা পঁচাত্তর হাজার মাত্র',
-                amountFig: '৳ ৭৫,০০০/-',
-                account: '৫৫৬৬৭৭৮৮৯৯০০',
-                micr: '⑆001120089⑆ ⑈5566778899001⑈ ⑇000256⑇',
-                signature: 'কামাল',
-                result: {
-                    bank: { value: 'Sonali Bank Limited', conf: 94 },
-                    account: { value: '5566778899001', conf: 88 },
-                    chequeNum: { value: '000256', conf: 85 },
-                    date: { value: '10/01/2025', conf: 92 },
-                    payee: { value: 'Kamal Hossain', conf: 86 },
-                    amountFig: { value: '৳75,000', conf: 91 },
-                    amountWords: { value: 'Seventy Five Thousand', conf: 83 },
-                    micr: { value: '001120089-5566778899001-000256', conf: 89 }
-                },
-                validation: { valid: true, message: 'Bengali handwriting detected. TrOCR applied.' },
-                time: 3102,
-                models: 'Gemini + TrOCR + Tesseract-Ben',
-                quality: 'Grade B'
-            },
-            'low-light': {
-                chequeClass: 'low-light',
-                bankLogo: '🏦 CITY BANK',
-                bankNameBn: 'দ্য সিটি ব্যাংক',
-                date: '05/01/2025',
-                payee: 'Fatima Khatun',
-                amountWords: 'One Lakh Only',
-                amountFig: '৳ 1,00,000/-',
-                account: '4455667788990',
-                micr: '⑆225180167⑆ ⑈4455667788990⑈ ⑇000089⑇',
-                signature: 'F. Khatun',
-                result: {
-                    bank: { value: 'The City Bank Limited', conf: 91 },
-                    account: { value: '4455667788990', conf: 93 },
-                    chequeNum: { value: '000089', conf: 90 },
-                    date: { value: '05/01/2025', conf: 95 },
-                    payee: { value: 'Fatima Khatun', conf: 92 },
-                    amountFig: { value: '৳1,00,000', conf: 97 },
-                    amountWords: { value: 'One Lakh Only', conf: 88 },
-                    micr: { value: '225180167-4455667788990-000089', conf: 86 }
-                },
-                validation: { valid: true, message: 'Low light corrected with CLAHE.' },
-                time: 2156,
-                models: 'Gemini + CLAHE',
-                quality: 'Grade C → A'
-            },
-            rotated: {
-                chequeClass: 'rotated',
-                bankLogo: '🏦 ISLAMI BANK',
-                bankNameBn: 'ইসলামী ব্যাংক',
-                date: '18/01/2025',
-                payee: 'Abdul Karim',
-                amountWords: 'Thirty Thousand Only',
-                amountFig: '৳ 30,000/-',
-                account: '1122334455667',
-                micr: '⑆125090145⑆ ⑈1122334455667⑈ ⑇000312⑇',
-                signature: 'A. Karim',
-                result: {
-                    bank: { value: 'Islami Bank Bangladesh', conf: 96 },
-                    account: { value: '1122334455667', conf: 98 },
-                    chequeNum: { value: '000312', conf: 97 },
-                    date: { value: '18/01/2025', conf: 99 },
-                    payee: { value: 'Abdul Karim', conf: 95 },
-                    amountFig: { value: '৳30,000', conf: 98 },
-                    amountWords: { value: 'Thirty Thousand Only', conf: 93 },
-                    micr: { value: '125090145-1122334455667-000312', conf: 96 }
-                },
-                validation: { valid: true, message: 'Auto-deskew applied. -8° correction.' },
-                time: 2023,
-                models: 'Gemini + Deskew',
-                quality: 'Grade A'
-            },
-            bengali: {
-                chequeClass: '',
-                bankLogo: '🏦 জনতা ব্যাংক',
-                bankNameBn: 'Janata Bank Limited',
-                date: '২৫/০১/২০২৫',
-                payee: 'নাজমুল ইসলাম',
-                amountWords: 'টাকা এক লক্ষ পঞ্চাশ হাজার',
-                amountFig: '৳ ১,৫০,০০০/-',
-                account: '৯৮৭৬৫৪৩২১০১২৩',
-                micr: '⑆002110078⑆ ⑈9876543210123⑈ ⑇০০০৫৬৭⑇',
-                signature: 'নাজমুল',
-                result: {
-                    bank: { value: 'Janata Bank / জনতা ব্যাংক', conf: 97 },
-                    account: { value: '9876543210123', conf: 96 },
-                    chequeNum: { value: '000567', conf: 94 },
-                    date: { value: '25/01/2025', conf: 98 },
-                    payee: { value: 'Nazmul Islam', conf: 95 },
-                    amountFig: { value: '৳1,50,000', conf: 99 },
-                    amountWords: { value: 'One Lakh Fifty Thousand', conf: 92 },
-                    micr: { value: '002110078-9876543210123-000567', conf: 95 }
-                },
-                validation: { valid: true, message: 'Full Bengali processed. Numerals converted.' },
-                time: 2456,
-                models: 'Gemini + Tesseract-Ben',
-                quality: 'Grade A'
-            }
-        };
-
-        let currentScenario = 'standard';
-        let isProcessing = false;
-
-        // ============================================
         // REVEAL ANIMATIONS - FIXED
         // ============================================
         let revealObserver = null;
 
         function checkReveals() {
             const revealElements = document.querySelectorAll('.reveal:not(.active)');
-            
             revealElements.forEach(el => {
                 const rect = el.getBoundingClientRect();
                 const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-                
+
                 // Check if element is in viewport
                 if (rect.top <= windowHeight * 0.9 && rect.bottom >= 0) {
                     el.classList.add('active');
@@ -3074,47 +2178,140 @@ BANGLADESH_BANKS = {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('active');
-                            // Optionally unobserve after revealing
                             revealObserver.unobserve(entry.target);
                         }
                     });
-                }, { 
-                    threshold: 0.1, 
-                    rootMargin: '0px 0px -10% 0px' 
+                }, {
+                    threshold: 0.1, // Trigger when 10% of element is visible
+                    rootMargin: '0px 0px -50px 0px' // Adjust root margin if needed
                 });
-                
+
                 document.querySelectorAll('.reveal').forEach(el => {
                     revealObserver.observe(el);
                 });
             } else {
-                // Fallback: use scroll event for older browsers
-                window.addEventListener('scroll', checkReveals, { passive: true });
-                checkReveals(); // Initial check
+                // Fallback: Use scroll event listener
+                window.addEventListener('scroll', checkReveals);
+                window.addEventListener('resize', checkReveals);
+                // Initial check in case elements are already in view
+                setTimeout(checkReveals, 100);
             }
-            
-            // Also do an immediate check for elements already in viewport
-            setTimeout(checkReveals, 100);
         }
 
-        // ============================================
         // SCROLL PROGRESS
         // ============================================
         function updateScrollProgress() {
             const scrollIndicator = document.getElementById('scrollIndicator');
             if (!scrollIndicator) return;
-            
+
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            
+
             if (docHeight > 0) {
                 const scrollPercent = (scrollTop / docHeight) * 100;
                 scrollIndicator.style.width = scrollPercent + '%';
             }
         }
-
         // ============================================
+
+
         // DEMO TAB SWITCHING
         // ============================================
+        let currentScenario = 'standard';
+        const scenarios = {
+            standard: {
+                name: 'Standard',
+                time: 450,
+                models: 'OCR, VLM',
+                quality: 'High',
+                bankLogo: '🏦',
+                bankNameBn: 'IFIC ব্যাংক',
+                date: '১৫/১১/২০২৪',
+                payee: 'শ্রী মোহাম্মদ হাসান',
+                amountWords: 'এক হাজার পাঁচ শত টাকা মাত্র',
+                amountFig: '1500.00',
+                account: '0123456789',
+                micr: 'C:0123456789A:123456789B:IFIC',
+                signature: 'মো. হাসান',
+                chequeClass: '', // e.g., 'blurry', 'dark', 'rotated', 'handwritten', 'partial'
+                result: {
+                    bank: { value: 'IFIC Bank', conf: 99.5 },
+                    account: { value: '0123456789', conf: 99.8 },
+                    chequeNum: { value: '789456', conf: 98.2 },
+                    date: { value: '15/11/2024', conf: 99.0 },
+                    payee: { value: 'Mohammad Hassan', conf: 97.5 },
+                    amountFig: { value: '1500.00', conf: 99.9 },
+                    amountWords: { value: 'One Thousand Five Hundred Only', conf: 98.0 },
+                    micr: { value: 'C:0123456789A:123456789B:IFIC', conf: 99.2 }
+                },
+                validation: {
+                    valid: true,
+                    message: 'Cheque details match bank records.'
+                }
+            },
+            lowQuality: {
+                name: 'Low Quality',
+                time: 620,
+                models: 'OCR, VLM, Enhance',
+                quality: 'Medium',
+                bankLogo: '📸',
+                bankNameBn: 'সিটি ব্যাংক',
+                date: '২০/১০/২০২৪',
+                payee: 'জন ডো',
+                amountWords: 'দুই হাজার টাকা মাত্র',
+                amountFig: '2000.00',
+                account: '9876543210',
+                micr: 'C:9876543210A:987654321B:CITY',
+                signature: 'জন ডো',
+                chequeClass: 'blurry',
+                result: {
+                    bank: { value: 'City Bank', conf: 97.2 },
+                    account: { value: '9876543210', conf: 96.5 },
+                    chequeNum: { value: '123789', conf: 94.8 },
+                    date: { value: '20/10/2024', conf: 95.0 },
+                    payee: { value: 'John Doe', conf: 93.1 },
+                    amountFig: { value: '2000.00', conf: 97.9 },
+                    amountWords: { value: 'Two Thousand Only', conf: 94.5 },
+                    micr: { value: 'C:9876543210A:987654321B:CITY', conf: 96.0 }
+                },
+                validation: {
+                    valid: false,
+                    message: 'Low image quality detected. Manual review recommended.'
+                }
+            },
+            handwritten: {
+                name: 'Handwritten',
+                time: 780,
+                models: 'OCR, VLM, HTR',
+                quality: 'Medium-High',
+                bankLogo: '✍️',
+                bankNameBn: 'এবি ব্যাংক',
+                date: '০৫/০৯/২০২৪',
+                payee: 'মোহাম্মদ আলী',
+                amountWords: 'পাঁচ হাজার আট শত টাকা মাত্র',
+                amountFig: '5800.00',
+                account: '1122334455',
+                micr: 'C:1122334455A:112233445B:ABBN',
+                signature: 'মো. আলী',
+                chequeClass: 'handwritten',
+                result: {
+                    bank: { value: 'AB Bank', conf: 96.8 },
+                    account: { value: '1122334455', conf: 97.0 },
+                    chequeNum: { value: '456123', conf: 95.5 },
+                    date: { value: '05/09/2024', conf: 96.0 },
+                    payee: { value: 'Mohammad Ali', conf: 94.2 },
+                    amountFig: { value: '5800.00', conf: 97.5 },
+                    amountWords: { value: 'Five Thousand Eight Hundred Only', conf: 93.8 },
+                    micr: { value: 'C:1122334455A:112233445B:ABBN', conf: 98.1 }
+                },
+                validation: {
+                    valid: true,
+                    message: 'Handwritten details validated successfully.'
+                }
+            }
+            // Add more scenarios as needed
+        };
+
         function initDemoTabs() {
             document.querySelectorAll('.demo-tab').forEach(tab => {
                 tab.addEventListener('click', () => {
@@ -3130,22 +2327,22 @@ BANGLADESH_BANKS = {
         function updateChequeDisplay() {
             const scenario = scenarios[currentScenario];
             if (!scenario) return;
-            
+
             const cheque = document.getElementById('chequePreview');
             if (!cheque) return;
-            
+
             // Reset classes
             cheque.className = 'cheque-container';
             if (scenario.chequeClass) {
                 cheque.classList.add(scenario.chequeClass);
             }
-            
+
             // Update content safely
             const bankLogo = document.querySelector('.cheque-bank-logo');
             if (bankLogo) {
                 bankLogo.innerHTML = `<div>${scenario.bankLogo}</div><div class="cheque-bank-name">${scenario.bankNameBn}</div>`;
             }
-            
+
             const elements = {
                 'chequeDate': scenario.date,
                 'chequePayee': `Pay: <strong>${scenario.payee}</strong>`,
@@ -3155,7 +2352,7 @@ BANGLADESH_BANKS = {
                 'chequeMicr': scenario.micr,
                 'chequeSignature': scenario.signature
             };
-            
+
             for (const [id, value] of Object.entries(elements)) {
                 const el = document.getElementById(id);
                 if (el) {
@@ -3172,29 +2369,26 @@ BANGLADESH_BANKS = {
             document.querySelectorAll('.output-field-value').forEach(el => {
                 el.textContent = '—';
             });
-            
             document.querySelectorAll('.output-field-confidence').forEach(el => {
                 el.textContent = '—';
                 el.className = 'output-field-confidence';
             });
-            
             document.querySelectorAll('.output-field').forEach(el => {
                 el.classList.remove('extracted');
             });
-            
+
             const validationResult = document.getElementById('validationResult');
             if (validationResult) {
                 validationResult.style.display = 'none';
             }
-            
+
             const procTime = document.getElementById('procTime');
             const procModels = document.getElementById('procModels');
             const procQuality = document.getElementById('procQuality');
-            
             if (procTime) procTime.textContent = '—';
             if (procModels) procModels.textContent = '—';
             if (procQuality) procQuality.textContent = '—';
-            
+
             const cheque = document.getElementById('chequePreview');
             if (cheque) {
                 cheque.classList.remove('scanning', 'processed');
@@ -3210,23 +2404,23 @@ BANGLADESH_BANKS = {
             resetOutput();
         }
 
+        let isProcessing = false;
         function processDemo() {
             if (isProcessing) return;
             isProcessing = true;
-            
+
             const btn = document.getElementById('processBtn');
             if (!btn) return;
-            
             btn.disabled = true;
             btn.textContent = 'Processing...';
-            
+
             const cheque = document.getElementById('chequePreview');
             if (cheque) {
                 cheque.classList.add('scanning');
             }
-            
+
             resetOutput();
-            
+
             const scenario = scenarios[currentScenario];
             if (!scenario) {
                 isProcessing = false;
@@ -3234,15 +2428,15 @@ BANGLADESH_BANKS = {
                 btn.textContent = 'Process Cheque';
                 return;
             }
-            
+
             const actualTime = Math.round(scenario.time + Math.random() * 400 - 200);
-            
+
             setTimeout(() => {
                 if (cheque) {
                     cheque.classList.remove('scanning');
                     cheque.classList.add('processed');
                 }
-                
+
                 const fields = [
                     ['outBank', 'outBankConf', scenario.result.bank],
                     ['outAccount', 'outAccountConf', scenario.result.account],
@@ -3253,73 +2447,61 @@ BANGLADESH_BANKS = {
                     ['outAmountWords', 'outAmountWordsConf', scenario.result.amountWords],
                     ['outMicr', 'outMicrConf', scenario.result.micr]
                 ];
-                
+
                 fields.forEach((field, index) => {
                     setTimeout(() => {
                         const valueEl = document.getElementById(field[0]);
                         const confEl = document.getElementById(field[1]);
                         const data = field[2];
-                        
+
                         if (valueEl && confEl && data) {
                             valueEl.textContent = data.value;
                             confEl.textContent = data.conf + '%';
-                            confEl.className = 'output-field-confidence ' + 
-                                (data.conf >= 90 ? 'confidence-high' : 
-                                 data.conf >= 75 ? 'confidence-medium' : 'confidence-low');
-                            
-                            const fieldContainer = valueEl.closest('.output-field');
-                            if (fieldContainer) {
-                                fieldContainer.classList.add('extracted');
-                            }
+                            confEl.className = 'output-field-confidence ' + (data.conf >= 90 ? 'confidence-high' : data.conf >= 75 ? 'confidence-medium' : 'confidence-low');
+                            valueEl.closest('.output-field').classList.add('extracted');
                         }
-                    }, index * 120);
+                    }, index * 120); // Stagger the updates
                 });
-                
-                // Show validation after all fields
-                setTimeout(() => {
-                    const validationEl = document.getElementById('validationResult');
-                    if (validationEl) {
-                        validationEl.style.display = 'flex';
-                        validationEl.className = 'validation-status ' + 
-                            (scenario.validation.valid ? 'valid' : 'warning');
-                        
-                        const icon = validationEl.querySelector('.validation-icon');
-                        const title = validationEl.querySelector('h4');
-                        const message = document.getElementById('validationMessage');
-                        
-                        if (icon) icon.textContent = scenario.validation.valid ? '✅' : '⚠️';
-                        if (title) title.textContent = scenario.validation.valid ? 'Validation Passed' : 'Needs Review';
-                        if (message) message.textContent = scenario.validation.message;
-                    }
-                    
-                    const procTime = document.getElementById('procTime');
-                    const procModels = document.getElementById('procModels');
-                    const procQuality = document.getElementById('procQuality');
-                    
-                    if (procTime) procTime.textContent = actualTime + 'ms';
-                    if (procModels) procModels.textContent = scenario.models;
-                    if (procQuality) procQuality.textContent = scenario.quality;
-                    
-                    btn.disabled = false;
-                    btn.textContent = 'Process Cheque';
-                    isProcessing = false;
-                }, fields.length * 120 + 200);
-                
-            }, 1500 + Math.random() * 800);
-        }
 
+                // Show validation result after all fields are updated
+                setTimeout(() => {
+                    const validationResult = document.getElementById('validationResult');
+                    const icon = document.getElementById('validationIcon');
+                    const title = document.getElementById('validationTitle');
+                    const message = document.getElementById('validationMessage');
+
+                    if (icon) icon.textContent = scenario.validation.valid ? '✅' : '⚠️';
+                    if (title) title.textContent = scenario.validation.valid ? 'Validation Passed' : 'Needs Review';
+                    if (message) message.textContent = scenario.validation.message;
+                    if (validationResult) validationResult.style.display = 'flex';
+                }, fields.length * 120 + 200);
+
+                const procTime = document.getElementById('procTime');
+                const procModels = document.getElementById('procModels');
+                const procQuality = document.getElementById('procQuality');
+                if (procTime) procTime.textContent = actualTime + 'ms';
+                if (procModels) procModels.textContent = scenario.models;
+                if (procQuality) procQuality.textContent = scenario.quality;
+
+                btn.disabled = false;
+                btn.textContent = 'Process Cheque';
+                isProcessing = false;
+            }, 1500 + Math.random() * 800); // Simulate processing delay
+        }
         // ============================================
+
+
         // CODE COPY
         // ============================================
         function copyCode(button) {
             const codeWrapper = button.closest('.code-wrapper');
             if (!codeWrapper) return;
-            
+
             const pre = codeWrapper.querySelector('pre');
             if (!pre) return;
-            
+
             const code = pre.textContent;
-            
+
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(code).then(() => {
                     showCopySuccess(button);
@@ -3338,14 +2520,12 @@ BANGLADESH_BANKS = {
             textarea.style.opacity = '0';
             document.body.appendChild(textarea);
             textarea.select();
-            
             try {
                 document.execCommand('copy');
                 showCopySuccess(button);
             } catch (err) {
                 console.error('Copy failed:', err);
             }
-            
             document.body.removeChild(textarea);
         }
 
@@ -3354,15 +2534,15 @@ BANGLADESH_BANKS = {
             button.textContent = 'Copied!';
             button.style.borderColor = 'var(--accent)';
             button.style.color = 'var(--accent)';
-            
             setTimeout(() => {
                 button.textContent = originalText;
                 button.style.borderColor = '';
                 button.style.color = '';
             }, 2000);
         }
-
         // ============================================
+
+
         // DOC TYPE CARDS
         // ============================================
         function initDocTypeCards() {
@@ -3373,57 +2553,21 @@ BANGLADESH_BANKS = {
                 });
             });
         }
+        // ============================================
 
-        // ============================================
-        // SMOOTH SCROLL
-        // ============================================
-        function initSmoothScroll() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href === '#') return;
-                    
-                    const target = document.querySelector(href);
-                    if (target) {
-                        e.preventDefault();
-                        target.scrollIntoView({ 
-                            behavior: 'smooth', 
-                            block: 'start' 
-                        });
-                    }
-                });
-            });
-        }
 
-        // ============================================
-        // INITIALIZATION
-        // ============================================
-        function init() {
-            // Initialize all components
+        // Initialize everything when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
             initRevealObserver();
             initDemoTabs();
             initDocTypeCards();
-            initSmoothScroll();
-            
-            // Initial display update
-            updateChequeDisplay();
-            
-            // Scroll progress
-            window.addEventListener('scroll', updateScrollProgress, { passive: true });
-            updateScrollProgress();
-            
-            // Resize handler for reveal check
-            window.addEventListener('resize', () => {
-                setTimeout(checkReveals, 100);
-            }, { passive: true });
-        }
+            updateChequeDisplay(); // Initialize the default cheque display
 
-        // Run init when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
-        }
+            // Attach scroll progress listener
+            window.addEventListener('scroll', updateScrollProgress);
+            updateScrollProgress(); // Initial call
+        });
+
     </script>
 </body>
 </html>
