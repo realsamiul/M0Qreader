@@ -232,6 +232,14 @@
             display: flex;
             align-items: center;
             gap: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s var(--ease-out-expo);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .nav-island:hover {
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 1);
         }
         .nav-island a {
             font-family: var(--font-mono);
@@ -248,7 +256,9 @@
             color: var(--accent);
         }
         .nav-logo {
-            font-family: var(--font-mono);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-weight: 700;
             font-size: 0.8rem;
             letter-spacing: 0;
@@ -256,14 +266,14 @@
             font-family: var(--font-editorial);
         }
         .nav-logo-icon {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             background: var(--accent);
             border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--black);
         }
         @media (max-width: 768px) {
@@ -323,7 +333,7 @@
             color: var(--accent);
         }
 
-        /* Mobile styles for mini menu */
+        /* Mobile styles for mini menu (expands upwards) */
         @media (max-width: 768px) {
             .nav-island {
                 flex-wrap: wrap; /* Allow wrapping if menu is open */
@@ -345,9 +355,11 @@
 
             .nav-menu-list {
                 position: absolute; /* Position absolutely */
-                top: calc(100% + 0.5rem); /* Position below the island */
+                /* Change positioning to expand upwards */
+                bottom: 100%; /* Align bottom of menu to top of island */
                 left: 50%;
-                transform: translateX(-50%); /* Center the menu */
+                transform: translateX(-50%) translateY(10px); /* Center the menu horizontally and start slightly below its target (above island) */
+                margin-bottom: 0.5rem; /* Add space between menu and island */
                 background: rgba(255, 255, 255, 0.95); /* Match island bg */
                 backdrop-filter: blur(20px) saturate(180%);
                 -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -355,14 +367,15 @@
                 padding: 1rem;
                 flex-direction: column; /* Stack links vertically */
                 gap: 0.75rem;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.1); /* Adjust shadow direction for top */
                 z-index: 1001; /* Above island */
                 width: calc(100% - 2rem); /* Almost full width */
                 max-height: 70vh; /* Limit height */
                 overflow-y: auto; /* Scroll if needed */
                 opacity: 0;
                 visibility: hidden;
-                transform: translateX(-50%) translateY(-10px); /* Start slightly above */
+                /* Start slightly further below (more negative translateY) to animate up */
+                transform: translateX(-50%) translateY(20px); /* Center the menu horizontally and start further below its target (above island) */
                 transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
             }
 
@@ -370,7 +383,8 @@
             .nav-toggle-checkbox:checked ~ .nav-menu-list {
                 opacity: 1;
                 visibility: visible;
-                transform: translateX(-50%) translateY(0); /* Move to correct position */
+                /* Move to correct position above island */
+                transform: translateX(-50%) translateY(0); /* Center the menu horizontally, final vertical position */
             }
 
             /* Hide original links in island on mobile */
@@ -439,17 +453,21 @@
             font-size: 1.1rem;
             margin-bottom: var(--space-xl);
             color: var(--text-muted);
+            max-width: 650px;
+            line-height: 1.5;
         }
         .hero-actions {
             display: flex;
             gap: 1.5rem;
             flex-wrap: wrap;
+            margin-bottom: var(--space-2xl);
         }
         .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            display: flex;
             gap: var(--space-xl);
-            margin-top: var(--space-3xl);
+            flex-wrap: wrap;
+            padding-top: var(--space-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         .hero-stat {
             display: flex;
@@ -457,11 +475,11 @@
         }
         .hero-stat-value {
             font-family: var(--font-editorial);
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 200;
+            color: var(--accent);
             line-height: 1;
-            color: var(--white);
-            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
         }
         .hero-stat-label {
             font-family: var(--font-mono);
@@ -498,168 +516,70 @@
             background: var(--accent-dim);
             color: var(--black);
         }
+        .btn-primary-alt {
+            background: var(--white);
+            transform: translateY(-2px);
+        }
         .btn-secondary {
             background: transparent;
             color: var(--white);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-        .btn-outline {
-            background: transparent;
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
             border-color: var(--accent);
             color: var(--accent);
         }
 
-        /* - BACKGROUND VARIANTS - */
-        .bg-dark { background: #0a0a0a; }
-        .bg-white { background: var(--white); color: var(--black); }
-        .bg-white p { color: rgba(0, 0, 0, 0.7); }
-        .bg-white h2, .bg-white h3, .bg-white h4 { color: var(--black); }
-        .bg-white .section-label { color: var(--accent); }
-        .bg-white .section-label::before { background: var(--accent); }
-
-        /* Alternating Section Backgrounds */
-        section:nth-of-type(even) {
-            background-color: var(--white);
-            color: var(--black);
-        }
-        section:nth-of-type(even) p {
-            color: rgba(0, 0, 0, 0.7);
-        }
-        section:nth-of-type(even) h2,
-        section:nth-of-type(even) h3,
-        section:nth-of-type(even) h4,
-        section:nth-of-type(even) .section-label,
-        section:nth-of-type(even) .highlight {
-            color: var(--black);
-        }
-        section:nth-of-type(even) .section-label {
-             color: var(--accent);
-        }
-        section:nth-of-type(even) .section-label::before {
-             background: var(--accent);
-        }
-        section:nth-of-type(even) .hero-subtitle,
-        section:nth-of-type(even) p.large-text,
-        section:nth-of-type(even) .stat-label,
-        section:nth-of-type(even) .hero-stat-label,
-        section:nth-of-type(even) .output-field-label,
-        section:nth-of-type(even) .code-content,
-        section:nth-of-type(even) .code-content pre {
-            color: rgba(0, 0, 0, 0.7);
-        }
-        section:nth-of-type(even) .stat-item,
-        section:nth-of-type(even) .problem-card,
-        section:nth-of-type(even) .doc-type-card,
-        section:nth-of-type(even) .scenario-card,
-        section:nth-of-type(even) .pricing-card,
-        section:nth-of-type(even) .arch-layer,
-        section:nth-of-type(even) .code-wrapper {
-            background-color: var(--black);
-            color: var(--white);
-        }
-        section:nth-of-type(even) .stat-grid,
-        section:nth-of-type(even) .comparison-table,
-        section:nth-of-type(even) .scenarios-grid,
-        section:nth-of-type(even) .pricing-grid {
-            background: rgba(0, 0, 0, 0.05);
-        }
-        section:nth-of-type(even) .comparison-table th,
-        section:nth-of-type(even) .comparison-table td {
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-        section:nth-of-type(even) .btn-primary {
-             color: var(--white);
-             background: var(--black);
-        }
-        section:nth-of-type(even) .btn-primary:hover {
-             color: var(--black);
-             background: var(--accent);
-        }
-        section:nth-of-type(even) .btn-secondary {
-             color: var(--black);
-             border-color: rgba(0, 0, 0, 0.2);
-        }
-        section:nth-of-type(even) .btn-secondary:hover {
-             color: var(--accent);
-             border-color: var(--accent);
-        }
-
-
-        /* - RESPONSIVE - */
-        @media (max-width: 768px) {
-            :root {
-                --gutter: 1.5rem;
-            }
-            h1 {
-                line-height: 1;
-            }
-            .hero-stats {
-                gap: var(--space-lg);
-            }
-        }
-
-        /* - SCROLLBAR - */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--gray-dark);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-dim);
-        }
-
-        /* - REVEAL ANIMATIONS - */
-        .reveal {
-            opacity: 0;
-            transform: translateY(60px);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 1.2s var(--ease-out-expo);
-        }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
-
-        /* - SCROLL INDICATOR - */
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 2px;
-            background: var(--accent);
-            z-index: 9999;
-            transform-origin: left;
-            transition: transform 0.1s ease;
-        }
-
-        /* - PROBLEM SECTION - */
-        .problem-grid {
+        /* - STAT GRID - */
+        .stat-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-lg);
+            gap: 1px;
+            background: rgba(255, 255, 255, 0.05);
+            margin: var(--space-xl) 0;
+        }
+        @media (min-width: 768px) {
+            .stat-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .stat-item {
+            background: var(--black);
+            padding: var(--space-lg);
+            text-align: center;
+        }
+        .stat-number {
+            font-family: var(--font-editorial);
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 200;
+            color: var(--accent);
+            line-height: 1;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-sm);
+        }
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        /* - PROBLEM CARDS - */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-md);
             margin-top: var(--space-xl);
         }
-        @media (max-width: 768px) {
+        @media (min-width: 600px) {
             .problem-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1000px) {
+            .problem-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
         .problem-card {
@@ -792,14 +712,38 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
         }
+        .demo-tabs {
+            display: flex;
+            gap: 0.25rem;
+            flex-wrap: wrap;
+        }
+        .demo-tab {
+            padding: 0.75rem 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+        }
+        .demo-tab:hover {
+            color: var(--white);
+        }
+        .demo-tab.active {
+            background: var(--accent);
+            color: var(--black);
+        }
         .demo-status {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
         }
         .demo-status-text {
             font-family: var(--font-mono);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 0.05em;
             color: var(--text-muted);
         }
@@ -842,6 +786,8 @@
             color: #333;
             text-align: center;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         .cheque-container.scanning {
             filter: blur(1px);
@@ -851,6 +797,56 @@
             filter: none;
             opacity: 1;
         }
+        .scan-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(0, 224, 84, 0.8);
+            box-shadow: 0 0 10px rgba(0, 224, 84, 0.5);
+            animation: scanAnim 1.5s linear infinite;
+        }
+        @keyframes scanAnim {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        .field-highlight {
+            position: absolute;
+            border: 2px solid var(--accent);
+            border-radius: 2px;
+            background: rgba(0, 224, 84, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .cheque-container.processed .field-highlight {
+            opacity: 1;
+        }
+        .cheque-bank-logo {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #1a5f2a;
+        }
+        .cheque-bank-name {
+            font-size: 0.55rem;
+            color: #666;
+            font-weight: 400;
+        }
+        .cheque-field {
+            position: absolute;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: #333;
+        }
+        .cheque-date { top: 1rem; right: 1rem; }
+        .cheque-payee { top: 2.5rem; left: 1rem; right: 1rem; }
+        .cheque-amount-words { top: 4rem; left: 1rem; right: 1rem; }
+        .cheque-amount-fig { top: 2.5rem; right: 1rem; }
+        .cheque-account { bottom: 2rem; left: 1rem; }
+        .cheque-micr { bottom: 1rem; left: 1rem; right: 1rem; font-family: 'OCR A Extended', monospace; letter-spacing: 0.1em; }
+        .cheque-signature { bottom: 1rem; right: 1rem; font-style: italic; }
         .cheque-bank-logo {
             display: flex;
             flex-direction: column;
@@ -861,11 +857,6 @@
             font-family: var(--font-editorial);
             font-weight: bold;
             font-size: 0.7rem;
-        }
-        .cheque-date {
-            position: absolute;
-            top: var(--space-sm);
-            right: var(--space-sm);
         }
         .cheque-payee, .cheque-amount-words, .cheque-amount-fig, .cheque-account, .cheque-micr, .cheque-signature {
             text-align: left;
@@ -884,6 +875,12 @@
             border-top: 1px solid #333;
             padding-top: 0.5rem;
         }
+        .cheque-container.blurry { filter: blur(2px); }
+        .cheque-container.dark { filter: brightness(0.4); }
+        .cheque-container.rotated { transform: rotate(-8deg) scale(0.95); }
+        .cheque-container.crumpled { background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 50%, #e9ecef 100%); box-shadow: inset 0 0 20px rgba(0,0,0,0.1); }
+        .cheque-container.handwritten { font-family: 'Brush Script MT', cursive; font-size: 0.9rem; }
+        .cheque-container.partial { clip-path: polygon(0 0, 85% 0, 100% 15%, 100% 100%, 0 100%); }
         /* Output Fields */
         .output-section {
             margin-bottom: var(--space-lg);
@@ -919,55 +916,70 @@
         }
         .output-field-label {
             font-family: var(--font-mono);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             color: var(--text-muted);
         }
         .output-field-value {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-family: var(--font-editorial);
+            font-size: 0.9rem;
             color: var(--white);
-            font-weight: 500;
         }
         .output-field-confidence {
             font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--text-muted);
+            font-size: 0.6rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 2px;
+            margin-left: 0.5rem;
         }
-        .output-field-confidence.confidence-high {
+        .confidence-high {
+            background: rgba(0, 224, 84, 0.1);
             color: var(--accent);
         }
-        .output-field-confidence.confidence-medium {
+        .confidence-medium {
+            background: rgba(255, 199, 0, 0.1);
             color: var(--warning);
         }
-        .output-field-confidence.confidence-low {
+        .confidence-low {
+            background: rgba(255, 74, 74, 0.1);
             color: var(--alert);
         }
-        .validation-result {
+        .validation-status {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            padding: var(--space-md);
+            gap: 1rem;
+            padding: var(--space-sm);
             margin-top: var(--space-md);
-            border-radius: 4px;
-            background: rgba(0, 0, 0, 0.2);
+        }
+        .validation-status.valid {
+            background: rgba(0, 224, 84, 0.05);
+            border: 1px solid rgba(0, 224, 84, 0.1);
+        }
+        .validation-status.warning {
+            background: rgba(255, 199, 0, 0.05);
+            border: 1px solid rgba(255, 199, 0, 0.1);
         }
         .validation-icon {
             font-size: 1.5rem;
         }
-        .validation-title {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
+        .validation-text h4 {
+            margin-bottom: 0.25rem;
         }
-        .validation-message {
-            font-size: 0.9rem;
-            color: var(--text-muted);
+        .validation-text p {
+            font-size: 0.8rem;
+            margin-bottom: 0;
         }
         .proc-info {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: var(--space-md);
             margin-top: var(--space-md);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: var(--space-md);
+            background: rgba(0, 0, 0, 0.3);
+            flex-wrap: wrap;
+            gap: var(--space-sm);
         }
         .proc-info-item {
             display: flex;
@@ -1272,20 +1284,24 @@
         /* - PRICING - */
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-lg);
+            grid-template-columns: 1fr;
+            gap: var(--space-md);
             margin-top: var(--space-xl);
+        }
+        @media (min-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
         .pricing-card {
             background: rgba(255, 255, 255, 0.01);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
             padding: var(--space-xl);
-            text-align: center;
-            transition: all 0.3s ease;
             position: relative;
+            transition: all 0.4s var(--ease-out-expo);
         }
         .pricing-card:hover {
+            border-color: rgba(0, 224, 84, 0.3);
             transform: translateY(-4px);
         }
         .pricing-card.featured {
@@ -1387,14 +1403,15 @@
         }
 
         /* - FOOTER - */
-        .footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        footer {
             padding: var(--space-2xl) 0 var(--space-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
         }
         @media (max-width: 768px) {
             .footer-grid {
@@ -1404,6 +1421,28 @@
         }
         .footer-brand {
             max-width: 300px;
+        }
+        .footer-brand .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-editorial);
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--white);
+            text-decoration: none;
+            margin-bottom: var(--space-sm);
+        }
+        .footer-brand .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+            font-size: 0.8rem;
         }
         .footer-brand p {
             font-size: 0.9rem;
@@ -1467,11 +1506,443 @@
             color: var(--black);
         }
 
+        /* - REVEAL ANIMATIONS - */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 1.2s var(--ease-out-expo);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* - SCROLL INDICATOR - */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--accent);
+            z-index: 9999;
+            transform-origin: left;
+            transition: transform 0.1s ease;
+        }
+
+        /* - BACKGROUND VARIANTS - */
+        .bg-dark { background: #0a0a0a; }
+        .bg-white { background: var(--white); color: var(--black); }
+        .bg-white p { color: rgba(0, 0, 0, 0.7); }
+        .bg-white h2, .bg-white h3, .bg-white h4 { color: var(--black); }
+        .bg-white .section-label { color: var(--accent); }
+        .bg-white .section-label::before { background: var(--accent); }
+
+        /* Alternating Section Backgrounds */
+        section:nth-of-type(odd) {
+            background-color: var(--black);
+            color: var(--white);
+        }
+        section:nth-of-type(odd) p {
+            color: var(--text-muted);
+        }
+        section:nth-of-type(odd) h2,
+        section:nth-of-type(odd) h3,
+        section:nth-of-type(odd) h4,
+        section:nth-of-type(odd) .section-label,
+        section:nth-of-type(odd) .highlight {
+            color: var(--white);
+        }
+        section:nth-of-type(odd) .section-label {
+             color: var(--accent);
+        }
+        section:nth-of-type(odd) .section-label::before {
+             background: var(--accent);
+        }
+        section:nth-of-type(odd) .hero-subtitle,
+        section:nth-of-type(odd) p.large-text,
+        section:nth-of-type(odd) .stat-label,
+        section:nth-of-type(odd) .hero-stat-label,
+        section:nth-of-type(odd) .output-field-label,
+        section:nth-of-type(odd) .code-content,
+        section:nth-of-type(odd) .code-content pre {
+            color: var(--text-muted);
+        }
+        section:nth-of-type(odd) .stat-item,
+        section:nth-of-type(odd) .problem-card,
+        section:nth-of-type(odd) .doc-type-card,
+        section:nth-of-type(odd) .scenario-card,
+        section:nth-of-type(odd) .pricing-card,
+        section:nth-of-type(odd) .arch-layer,
+        section:nth-of-type(odd) .code-wrapper {
+            background-color: var(--white);
+            color: var(--black);
+        }
+        section:nth-of-type(odd) .stat-grid,
+        section:nth-of-type(odd) .comparison-table,
+        section:nth-of-type(odd) .scenarios-grid,
+        section:nth-of-type(odd) .pricing-grid {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        section:nth-of-type(odd) .comparison-table th,
+        section:nth-of-type(odd) .comparison-table td {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        section:nth-of-type(odd) .btn-primary {
+             color: var(--black);
+             background: var(--accent);
+        }
+        section:nth-of-type(odd) .btn-primary:hover {
+             color: var(--black);
+             background: var(--accent-dim);
+        }
+        section:nth-of-type(odd) .btn-secondary {
+             color: var(--black);
+             border-color: rgba(0, 0, 0, 0.2);
+        }
+        section:nth-of-type(odd) .btn-secondary:hover {
+             color: var(--accent);
+             border-color: var(--accent);
+        }
+        section:nth-of-type(odd) .btn-primary-alt {
+             background: var(--black);
+             color: var(--white);
+        }
+        section:nth-of-type(odd) .btn-primary-alt:hover {
+             background: var(--gray-dark);
+        }
+        section:nth-of-type(odd) .nav-island {
+            background: rgba(0, 0, 0, 0.95);
+            color: var(--white);
+        }
+        section:nth-of-type(odd) .nav-island a {
+            color: var(--white);
+        }
+        section:nth-of-type(odd) .nav-island a:hover {
+            color: var(--accent);
+        }
+        section:nth-of-type(odd) .nav-logo-icon {
+            background: var(--black);
+            color: var(--accent);
+        }
+        section:nth-of-type(odd) .nav-menu-list {
+            background: rgba(0, 0, 0, 0.95);
+            color: var(--white);
+        }
+        section:nth-of-type(odd) .nav-menu-list a {
+            color: var(--white);
+        }
+        section:nth-of-type(odd) .nav-menu-list a:hover {
+            color: var(--accent);
+        }
+        section:nth-of-type(odd) .demo-container {
+            background: rgba(0, 0, 0, 0.01);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(odd) .demo-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(odd) .demo-input {
+            border-right: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(odd) .demo-output {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        section:nth-of-type(odd) .output-field {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        section:nth-of-type(odd) .output-field.extracted {
+            background: rgba(0, 224, 84, 0.03);
+        }
+        section:nth-of-type(odd) .proc-info {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        section:nth-of-type(odd) .validation-status.valid {
+            background: rgba(0, 224, 84, 0.05);
+            border: 1px solid rgba(0, 224, 84, 0.1);
+        }
+        section:nth-of-type(odd) .validation-status.warning {
+            background: rgba(255, 199, 0, 0.05);
+            border: 1px solid rgba(255, 199, 0, 0.1);
+        }
+        section:nth-of-type(odd) .arch-model {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        section:nth-of-type(odd) .code-content {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        section:nth-of-type(odd) .code-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(odd) .code-copy {
+            color: var(--text-muted);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        section:nth-of-type(odd) .code-copy:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        section:nth-of-type(odd) .footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(odd) .footer-links a {
+            color: rgba(0, 0, 0, 0.7);
+        }
+        section:nth-of-type(odd) .footer-links a:hover {
+            color: var(--accent);
+        }
+        section:nth-of-type(odd) .footer-bottom {
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(odd) .footer-social a {
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--text-muted);
+        }
+        section:nth-of-type(odd) .footer-social a:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--black);
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--white);
+            color: var(--black);
+        }
+        section:nth-of-type(even) p {
+            color: rgba(0, 0, 0, 0.7);
+        }
+        section:nth-of-type(even) h2,
+        section:nth-of-type(even) h3,
+        section:nth-of-type(even) h4,
+        section:nth-of-type(even) .section-label,
+        section:nth-of-type(even) .highlight {
+            color: var(--black);
+        }
+        section:nth-of-type(even) .section-label {
+             color: var(--accent);
+        }
+        section:nth-of-type(even) .section-label::before {
+             background: var(--accent);
+        }
+        section:nth-of-type(even) .hero-subtitle,
+        section:nth-of-type(even) p.large-text,
+        section:nth-of-type(even) .stat-label,
+        section:nth-of-type(even) .hero-stat-label,
+        section:nth-of-type(even) .output-field-label,
+        section:nth-of-type(even) .code-content,
+        section:nth-of-type(even) .code-content pre {
+            color: rgba(0, 0, 0, 0.7);
+        }
+        section:nth-of-type(even) .stat-item,
+        section:nth-of-type(even) .problem-card,
+        section:nth-of-type(even) .doc-type-card,
+        section:nth-of-type(even) .scenario-card,
+        section:nth-of-type(even) .pricing-card,
+        section:nth-of-type(even) .arch-layer,
+        section:nth-of-type(even) .code-wrapper {
+            background-color: var(--black);
+            color: var(--white);
+        }
+        section:nth-of-type(even) .stat-grid,
+        section:nth-of-type(even) .comparison-table,
+        section:nth-of-type(even) .scenarios-grid,
+        section:nth-of-type(even) .pricing-grid {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(even) .comparison-table th,
+        section:nth-of-type(even) .comparison-table td {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        section:nth-of-type(even) .btn-primary {
+             color: var(--white);
+             background: var(--black);
+        }
+        section:nth-of-type(even) .btn-primary:hover {
+             color: var(--black);
+             background: var(--accent);
+        }
+        section:nth-of-type(even) .btn-secondary {
+             color: var(--black);
+             border-color: rgba(0, 0, 0, 0.2);
+        }
+        section:nth-of-type(even) .btn-secondary:hover {
+             color: var(--accent);
+             border-color: var(--accent);
+        }
+        section:nth-of-type(even) .btn-primary-alt {
+             background: var(--white);
+             color: var(--black);
+        }
+        section:nth-of-type(even) .btn-primary-alt:hover {
+             background: var(--gray-light);
+        }
+        section:nth-of-type(even) .nav-island {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--black);
+        }
+        section:nth-of-type(even) .nav-island a {
+            color: var(--black);
+        }
+        section:nth-of-type(even) .nav-island a:hover {
+            color: var(--accent);
+        }
+        section:nth-of-type(even) .nav-logo-icon {
+            background: var(--accent);
+            color: var(--black);
+        }
+        section:nth-of-type(even) .nav-menu-list {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--black);
+        }
+        section:nth-of-type(even) .nav-menu-list a {
+            color: var(--black);
+        }
+        section:nth-of-type(even) .nav-menu-list a:hover {
+            color: var(--accent);
+        }
+        section:nth-of-type(even) .demo-container {
+            background: rgba(0, 0, 0, 0.01);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(even) .demo-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(even) .demo-input {
+            border-right: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(even) .demo-output {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        section:nth-of-type(even) .output-field {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        section:nth-of-type(even) .output-field.extracted {
+            background: rgba(0, 224, 84, 0.03);
+        }
+        section:nth-of-type(even) .proc-info {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        section:nth-of-type(even) .validation-status.valid {
+            background: rgba(0, 224, 84, 0.05);
+            border: 1px solid rgba(0, 224, 84, 0.1);
+        }
+        section:nth-of-type(even) .validation-status.warning {
+            background: rgba(255, 199, 0, 0.05);
+            border: 1px solid rgba(255, 199, 0, 0.1);
+        }
+        section:nth-of-type(even) .arch-model {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        section:nth-of-type(even) .code-content {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        section:nth-of-type(even) .code-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(even) .code-copy {
+            color: var(--text-muted);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        section:nth-of-type(even) .code-copy:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        section:nth-of-type(even) .footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(even) .footer-links a {
+            color: rgba(0, 0, 0, 0.7);
+        }
+        section:nth-of-type(even) .footer-links a:hover {
+            color: var(--accent);
+        }
+        section:nth-of-type(even) .footer-bottom {
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        section:nth-of-type(even) .footer-social a {
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--text-muted);
+        }
+        section:nth-of-type(even) .footer-social a:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--black);
+        }
+
+
+        /* - RESPONSIVE - */
+        @media (max-width: 768px) {
+            :root {
+                --gutter: 1.5rem;
+            }
+            h1 {
+                line-height: 1;
+            }
+            .hero-stats {
+                gap: var(--space-lg);
+            }
+        }
+
+        /* - SCROLLBAR - */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--gray-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-dim);
+        }
+
         /* - PULSE ANIMATION - */
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
+
+        /* - COMPARISON TABLE - */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--space-xl) 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .comparison-table td, .comparison-table th {
+            padding: var(--space-sm) var(--space-md);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: left;
+        }
+        .comparison-table th {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            background: rgba(0, 224, 84, 0.03);
+        }
+        .comparison-table tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+        }
+        .comparison-table .feature {
+            font-weight: 500;
+        }
+        .comparison-table .check { color: var(--accent); font-size: 1.25rem; }
+        .comparison-table .cross { color: var(--alert); font-size: 1.25rem; }
+        .comparison-table .partial { color: var(--warning); font-size: 1.25rem; }
+        .comparison-highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
     </style>
 </head>
 <body>
@@ -1508,7 +1979,7 @@
             <li><a href="#code">Code</a></li>
             <li><a href="#roadmap">Roadmap</a></li>
             <li><a href="#pricing">Pricing</a></li>
-            <!-- Add more list items as needed -->
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
@@ -1550,9 +2021,28 @@
     <!-- Problem Section -->
     <section id="problem">
         <div class="container">
-            <span class="section-label">PROBLEM</span>
-            <h2>Challenges in Financial Document Handling</h2>
-            <p>Traditional methods of processing financial documents in Bangladesh are plagued by inefficiencies, errors, and high operational costs.</p>
+            <span class="section-label reveal">CHALLENGE</span>
+            <h2 class="reveal reveal-delay-1">Tk 32,000 Crore<br>Annual Impact</h2>
+            <p class="large-text reveal reveal-delay-2">The Bangladeshi financial sector faces critical challenges with manual document processing, leading to significant economic losses and operational inefficiencies.</p>
+
+            <div class="stat-grid">
+                <div class="stat-item reveal reveal-delay-1">
+                    <div class="stat-number">32,000</div>
+                    <div class="stat-label">Crore BDT</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-2">
+                    <div class="stat-number">4-7</div>
+                    <div class="stat-label">Days Avg. Processing</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-3">
+                    <div class="stat-number">80%</div>
+                    <div class="stat-label">Errors from Manual Input</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-4">
+                    <div class="stat-number">2.3M</div>
+                    <div class="stat-label">BDT Fraud Losses</div>
+                </div>
+            </div>
 
             <div class="problem-grid">
                 <div class="problem-card reveal">
@@ -1590,29 +2080,39 @@
     <!-- Vision Section -->
     <section id="vision" class="bg-dark">
         <div class="container">
-            <span class="section-label">VISION</span>
-            <h2>Our Vision for Financial Automation</h2>
-            <p class="large-text">Leveraging cutting-edge AI to create a seamless, secure, and efficient financial ecosystem for Bangladesh.</p>
+            <span class="section-label reveal">VISION</span>
+            <h2 class="reveal reveal-delay-1">Our Vision for Financial Automation</h2>
+            <p class="large-text reveal reveal-delay-2">Leveraging cutting-edge AI to create a seamless, secure, and efficient financial ecosystem for Bangladesh.</p>
 
             <div class="doc-types-grid">
-                <div class="doc-type-card reveal active" data-type="cheque">
+                <div class="doc-type-card reveal active" data-doc="cheque">
                     <div class="doc-type-icon">💰</div>
-                    <h3 class="doc-type-name">Cheques</h3>
+                    <div class="doc-type-name">Cheques</div>
                     <span class="doc-type-status live">Live</span>
                 </div>
-                <div class="doc-type-card reveal" data-type="invoice">
+                <div class="doc-type-card reveal reveal-delay-1" data-doc="invoice">
                     <div class="doc-type-icon">📝</div>
-                    <h3 class="doc-type-name">Invoices</h3>
+                    <div class="doc-type-name">Invoices</div>
                     <span class="doc-type-status coming">Coming Soon</span>
                 </div>
-                <div class="doc-type-card reveal" data-type="bill">
+                <div class="doc-type-card reveal reveal-delay-2" data-doc="bill">
                     <div class="doc-type-icon">🧾</div>
-                    <h3 class="doc-type-name">Bills</h3>
+                    <div class="doc-type-name">Bills</div>
                     <span class="doc-type-status planned">Planned</span>
                 </div>
-                <div class="doc-type-card reveal" data-type="contract">
+                <div class="doc-type-card reveal reveal-delay-3" data-doc="contract">
                     <div class="doc-type-icon">📋</div>
-                    <h3 class="doc-type-name">Contracts</h3>
+                    <div class="doc-type-name">Contracts</div>
+                    <span class="doc-type-status planned">Planned</span>
+                </div>
+                <div class="doc-type-card reveal" data-doc="nid">
+                    <div class="doc-type-icon">🪪</div>
+                    <div class="doc-type-name">NID / Passport</div>
+                    <span class="doc-type-status planned">Planned</span>
+                </div>
+                <div class="doc-type-card reveal reveal-delay-1" data-doc="lc">
+                    <div class="doc-type-icon">🚢</div>
+                    <div class="doc-type-name">LC Documents</div>
                     <span class="doc-type-status planned">Planned</span>
                 </div>
             </div>
@@ -1620,15 +2120,23 @@
     </section>
 
     <!-- Demo Section -->
-    <section id="demo">
+    <section id="demo" class="bg-dark">
         <div class="container">
-            <span class="section-label">DEMO</span>
-            <h2>Real-Time Document Processing</h2>
-            <p>Experience our AI in action. Select a scenario and process a sample document.</p>
+            <span class="section-label reveal">DEMO</span>
+            <h2 class="reveal reveal-delay-1">Real-Time Document Processing</h2>
+            <p class="large-text reveal reveal-delay-2">Experience our AI in action. Select a scenario and process a sample document.</p>
 
-            <div class="demo-container reveal">
+            <div class="demo-container reveal reveal-delay-3">
                 <div class="demo-header">
                     <h3 class="demo-title">Cheque Processing Demo</h3>
+                    <div class="demo-tabs">
+                        <div class="demo-tab active" data-scenario="standard">Standard</div>
+                        <div class="demo-tab" data-scenario="lowLight">Low Light</div>
+                        <div class="demo-tab" data-scenario="rotated">Rotated</div>
+                        <div class="demo-tab" data-scenario="handwritten">Handwritten</div>
+                        <div class="demo-tab" data-scenario="crumpled">Crumpled</div>
+                        <div class="demo-tab" data-scenario="partial">Partial</div>
+                    </div>
                     <div class="demo-status">
                         <div class="demo-status-dot"></div>
                         <div class="demo-status-text">Live Processing</div>
@@ -1637,7 +2145,18 @@
                 <div class="demo-body">
                     <div class="demo-input">
                         <div class="cheque-container" id="chequePreview">
-                            <!-- Cheque content will be dynamically inserted here -->
+                            <div class="cheque-bank-logo">
+                                <div>🏦</div>
+                                <div class="cheque-bank-name">IFIC BANK LTD</div>
+                            </div>
+                            <div class="cheque-field cheque-date" id="chequeDate">১৫/১১/২০২৪</div>
+                            <div class="cheque-field cheque-payee" id="chequePayee">Pay: <strong>শ্রী মোহাম্মদ হাসান</strong></div>
+                            <div class="cheque-field cheque-amount-words" id="chequeAmountWords">এক হাজার পাঁচ শত টাকা মাত্র</div>
+                            <div class="cheque-field cheque-amount-fig" id="chequeAmountFig">৳ 1500.00</div>
+                            <div class="cheque-field cheque-account" id="chequeAccount">A/C: 0123456789</div>
+                            <div class="cheque-field cheque-micr" id="chequeMicr">C:0123456789A:123456789B:IFIC</div>
+                            <div class="cheque-field cheque-signature" id="chequeSignature">মো. হাসান</div>
+                            <div class="scan-line"></div>
                         </div>
                         <div style="margin-top: var(--space-md); display: flex; gap: 1rem;">
                             <button id="processBtn" class="btn btn-primary" onclick="processDemo()">Process Cheque</button>
@@ -1706,11 +2225,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="validationResult" class="validation-result" style="display: none;">
-                            <div class="validation-icon" id="validationIcon">✅</div>
-                            <div>
-                                <div class="validation-title" id="validationTitle">Validation Passed</div>
-                                <div class="validation-message" id="validationMessage">Document is valid.</div>
+                        <div id="validationResult" class="validation-status valid" style="display: none;">
+                            <div class="validation-icon">✅</div>
+                            <div class="validation-text">
+                                <h4>Validation Passed</h4>
+                                <p>Document is valid and matches bank records.</p>
                             </div>
                         </div>
                         <div class="proc-info">
@@ -1736,66 +2255,120 @@
                     <div class="scenario-header">
                         <div class="scenario-title">
                             <div class="scenario-icon">✅</div>
-                            <h3>Standard</h3>
+                            <div>
+                                <h4>Standard Quality</h4>
+                                <p style="font-size: 0.75rem; margin-bottom: 0;">Clear, well-lit</p>
+                            </div>
                         </div>
-                        <span class="scenario-badge">Default</span>
+                        <span class="scenario-badge">Handled</span>
                     </div>
                     <div class="scenario-preview">
-                        <div class="scenario-cheque">Standard Cheque</div>
+                        <div class="scenario-cheque">🏦 IFIC BANK<br>Pay: Hasan Ali<br>৳ 1,500/-</div>
                     </div>
                     <div class="scenario-result">
-                        <div class="scenario-result-item">
-                            <span>Accuracy</span>
-                            <span>99.5%</span>
-                        </div>
-                        <div class="scenario-result-item">
-                            <span>Time</span>
-                            <span>450ms</span>
-                        </div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Technique</span><span style="color: var(--accent);">PaddleOCR</span></div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Accuracy</span><span style="color: var(--accent);">99.2%</span></div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Extra Time</span><span>+0.1s</span></div>
                     </div>
                 </div>
                 <div class="scenario-card reveal reveal-delay-1">
                     <div class="scenario-header">
                         <div class="scenario-title">
-                            <div class="scenario-icon">📸</div>
-                            <h3>Low Quality</h3>
+                            <div class="scenario-icon">🌙</div>
+                            <div>
+                                <h4>Low Light Conditions</h4>
+                                <p style="font-size: 0.75rem; margin-bottom: 0;">Dark rooms, shadows</p>
+                            </div>
                         </div>
-                        <span class="scenario-badge">Challenging</span>
+                        <span class="scenario-badge">Handled</span>
                     </div>
                     <div class="scenario-preview">
-                        <div class="scenario-cheque blurry">Blurry Cheque</div>
+                        <div class="scenario-cheque dark"><div>🏦 CITY BANK<br>Pay: Fatima Khatun<br>৳ 100,000/-</div></div>
                     </div>
                     <div class="scenario-result">
-                        <div class="scenario-result-item">
-                            <span>Accuracy</span>
-                            <span>97.2%</span>
-                        </div>
-                        <div class="scenario-result-item">
-                            <span>Time</span>
-                            <span>620ms</span>
-                        </div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Technique</span><span style="color: var(--accent);">Adaptive histogram + Gamma</span></div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Accuracy</span><span style="color: var(--accent);">96.8%</span></div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Extra Time</span><span>+0.3s</span></div>
                     </div>
                 </div>
                 <div class="scenario-card reveal reveal-delay-2">
                     <div class="scenario-header">
                         <div class="scenario-title">
-                            <div class="scenario-icon">✍️</div>
-                            <h3>Handwritten</h3>
+                            <div class="scenario-icon">🔄</div>
+                            <div>
+                                <h4>Rotated / Skewed</h4>
+                                <p style="font-size: 0.75rem; margin-bottom: 0;">Misaligned capture</p>
+                            </div>
                         </div>
-                        <span class="scenario-badge">Complex</span>
+                        <span class="scenario-badge">Handled</span>
                     </div>
                     <div class="scenario-preview">
-                        <div class="scenario-cheque handwritten">Pay: শ্রী মোহাম্মদ হাসান</div>
+                        <div class="scenario-cheque rotated"><div>🏦 EASTERN BANK<br>Pay: S. Rahman<br>৳ 50,000/-</div></div>
                     </div>
                     <div class="scenario-result">
-                        <div class="scenario-result-item">
-                            <span>Accuracy</span>
-                            <span>96.8%</span>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Technique</span><span style="color: var(--accent);">Hough Transform</span></div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Accuracy</span><span style="color: var(--accent);">98.1%</span></div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Extra Time</span><span>+0.2s</span></div>
+                    </div>
+                </div>
+                <div class="scenario-card reveal">
+                    <div class="scenario-header">
+                        <div class="scenario-title">
+                            <div class="scenario-icon">✍️</div>
+                            <div>
+                                <h4>Handwritten Bengali</h4>
+                                <p style="font-size: 0.75rem; margin-bottom: 0;">Cursive, mixed scripts</p>
+                            </div>
                         </div>
-                        <div class="scenario-result-item">
-                            <span>Time</span>
-                            <span>780ms</span>
+                        <span class="scenario-badge">Handled</span>
+                    </div>
+                    <div class="scenario-preview">
+                        <div class="scenario-cheque handwritten"><div>মোহাম্মদ আলী<br>টাকা পঁচিশ হাজার<br>২৫,০০০/-</div></div>
+                    </div>
+                    <div class="scenario-result">
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Technique</span><span style="color: var(--accent);">TrOCR + BanglaLekha</span></div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Accuracy</span><span style="color: var(--accent);">91.5%</span></div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Extra Time</span><span>+1.2s</span></div>
+                    </div>
+                </div>
+                <div class="scenario-card reveal reveal-delay-1">
+                    <div class="scenario-header">
+                        <div class="scenario-title">
+                            <div class="scenario-icon">📄</div>
+                            <div>
+                                <h4>Damaged / Crumpled</h4>
+                                <p style="font-size: 0.75rem; margin-bottom: 0;">Folds, creases, stains</p>
+                            </div>
                         </div>
+                        <span class="scenario-badge">Handled</span>
+                    </div>
+                    <div class="scenario-preview">
+                        <div class="scenario-cheque crumpled"><div>🏦 NRB<br>Pay: R. Ahmed<br>৳ 8,750/-</div></div>
+                    </div>
+                    <div class="scenario-result">
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Technique</span><span style="color: var(--accent);">Inpainting + Super-res</span></div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Accuracy</span><span style="color: var(--accent);">94.2%</span></div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Extra Time</span><span>+0.8s</span></div>
+                    </div>
+                </div>
+                <div class="scenario-card reveal reveal-delay-2">
+                    <div class="scenario-header">
+                        <div class="scenario-title">
+                            <div class="scenario-icon">✂️</div>
+                            <div>
+                                <h4>Partial Capture</h4>
+                                <p style="font-size: 0.75rem; margin-bottom: 0;">Cut-off edges</p>
+                            </div>
+                        </div>
+                        <span class="scenario-badge">Handled</span>
+                    </div>
+                    <div class="scenario-preview">
+                        <div class="scenario-cheque partial"><div>🏦 EASTERN BANK<br>Pay: Salam Miah<br>৳ 18,500/-</div></div>
+                    </div>
+                    <div class="scenario-result">
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Technique</span><span style="color: var(--accent);">Context inference</span></div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Accuracy</span><span style="color: var(--accent);">85.3%</span></div>
+                        <div class="scenario-result-item"><span style="color: var(--text-muted);">Extra Time</span><span>Flags review</span></div>
                     </div>
                 </div>
             </div>
@@ -1805,89 +2378,91 @@
     <!-- Architecture Section -->
     <section id="architecture" class="bg-dark">
         <div class="container">
-            <span class="section-label">ARCHITECTURE</span>
-            <h2>AI Processing Pipeline</h2>
-            <p>Our robust architecture ensures high performance, accuracy, and scalability.</p>
+            <span class="section-label reveal">Technical Architecture</span>
+            <h2 class="reveal reveal-delay-1">Multi-Model<br>Intelligence Pipeline</h2>
+            <p class="large-text reveal reveal-delay-2">A sophisticated ensemble of OCR engines, vision-language models, and Bangladesh-specific validators.</p>
 
             <div class="architecture-flow">
-                <div class="arch-layer" data-layer="Input">
-                    <h3 class="arch-layer-title">
-                        <span class="arch-layer-icon">📥</span>
-                        Input Layer
-                    </h3>
-                    <p>Handles document ingestion via web interface, API, or batch uploads. Supports multiple formats (JPG, PNG, PDF).</p>
-                    <div class="arch-models">
-                        <div class="arch-model">
-                            <div class="arch-model-name">Web Interface</div>
-                            <div class="arch-model-desc">User-friendly UI</div>
-                        </div>
-                        <div class="arch-model">
-                            <div class="arch-model-name">REST API</div>
-                            <div class="arch-model-desc">Programmatic access</div>
-                        </div>
+                <!-- Layer 1 -->
+                <div class="arch-layer reveal" data-layer="Layer 1">
+                    <div class="arch-layer-title">
+                        <div class="arch-layer-icon">📥</div>Input & Preprocessing
                     </div>
-                </div>
-                <div class="arch-layer" data-layer="Preprocessing">
-                    <h3 class="arch-layer-title">
-                        <span class="arch-layer-icon">⚙️</span>
-                        Preprocessing
-                    </h3>
-                    <p>Optimizes document images for analysis. Includes noise reduction, contrast adjustment, and skew correction.</p>
+                    <p>Handles document ingestion via web interface, API, or batch uploads. Applies noise reduction, contrast adjustment, and skew correction.</p>
                     <div class="arch-models">
                         <div class="arch-model">
                             <div class="arch-model-name">OpenCV</div>
-                            <div class="arch-model-desc">Image processing</div>
+                            <div class="arch-model-desc">Image Processing</div>
+                        </div>
+                        <div class="arch-model">
+                            <div class="arch-model-name">Tesseract</div>
+                            <div class="arch-model-desc">Backup OCR</div>
+                        </div>
+                        <div class="arch-model">
+                            <div class="arch-model-name">PIL</div>
+                            <div class="arch-model-desc">Format Handling</div>
                         </div>
                     </div>
                 </div>
-                <div class="arch-layer" data-layer="OCR & AI">
-                    <h3 class="arch-layer-title">
-                        <span class="arch-layer-icon">🤖</span>
-                        OCR & AI Analysis
-                    </h3>
-                    <p>Extracts text using PaddleOCR and analyzes content using multimodal AI models for context and validation.</p>
+
+                <!-- Layer 2 -->
+                <div class="arch-layer reveal reveal-delay-1" data-layer="Layer 2">
+                    <div class="arch-layer-title">
+                        <div class="arch-layer-icon">🔍</div>Primary OCR & Layout Analysis
+                    </div>
+                    <p>Extracts text using PaddleOCR. Identifies key regions (payee, amount, MICR) using layout analysis algorithms.</p>
                     <div class="arch-models">
                         <div class="arch-model">
                             <div class="arch-model-name">PaddleOCR</div>
-                            <div class="arch-model-desc">Text extraction</div>
+                            <div class="arch-model-desc">Text Extraction</div>
                         </div>
                         <div class="arch-model">
-                            <div class="arch-model-name">Gemini Pro</div>
-                            <div class="arch-model-desc">Context analysis</div>
+                            <div class="arch-model-name">EAST</div>
+                            <div class="arch-model-desc">Text Detection</div>
+                        </div>
+                        <div class="arch-model">
+                            <div class="arch-model-name">LAM</div>
+                            <div class="arch-model-desc">Layout Analysis</div>
                         </div>
                     </div>
                 </div>
-                <div class="arch-layer" data-layer="Validation">
-                    <h3 class="arch-layer-title">
-                        <span class="arch-layer-icon">✅</span>
-                        Validation
-                    </h3>
-                    <p>Cross-references extracted data against known formats and databases to ensure accuracy and flag anomalies.</p>
+
+                <!-- Layer 3 -->
+                <div class="arch-layer reveal reveal-delay-2" data-layer="Layer 3">
+                    <div class="arch-layer-title">
+                        <div class="arch-layer-icon">🤖</div>Vision-Language Understanding
+                    </div>
+                    <p>Contextual analysis using multimodal AI (Gemini Pro Vision) to understand document semantics and validate extracted data.</p>
+                    <div class="arch-models">
+                        <div class="arch-model">
+                            <div class="arch-model-name">Gemini Pro Vision</div>
+                            <div class="arch-model-desc">Context Analysis</div>
+                        </div>
+                        <div class="arch-model">
+                            <div class="arch-model-name">BanglaDocVL</div>
+                            <div class="arch-model-desc">Custom Model</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layer 4 -->
+                <div class="arch-layer reveal reveal-delay-3" data-layer="Layer 4">
+                    <div class="arch-layer-title">
+                        <div class="arch-layer-icon">✅</div>Validation & Verification
+                    </div>
+                    <p>Cross-references data against known formats, bank databases, and rule engines. Flags anomalies for human review.</p>
                     <div class="arch-models">
                         <div class="arch-model">
                             <div class="arch-model-name">Rule Engine</div>
-                            <div class="arch-model-desc">Format checks</div>
+                            <div class="arch-model-desc">Format Checks</div>
                         </div>
                         <div class="arch-model">
-                            <div class="arch-model-name">Database</div>
-                            <div class="arch-model-desc">Reference data</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="arch-layer" data-layer="Output">
-                    <h3 class="arch-layer-title">
-                        <span class="arch-layer-icon">📤</span>
-                        Output
-                    </h3>
-                    <p>Delivers structured data via API or UI, with confidence scores and validation status.</p>
-                    <div class="arch-models">
-                        <div class="arch-model">
-                            <div class="arch-model-name">JSON API</div>
-                            <div class="arch-model-desc">Structured output</div>
+                            <div class="arch-model-name">NLP Validator</div>
+                            <div class="arch-model-desc">Semantic Checks</div>
                         </div>
                         <div class="arch-model">
-                            <div class="arch-model-name">Dashboard</div>
-                            <div class="arch-model-desc">Human review</div>
+                            <div class="arch-model-name">DB Lookup</div>
+                            <div class="arch-model-desc">Reference Data</div>
                         </div>
                     </div>
                 </div>
@@ -1896,13 +2471,14 @@
     </section>
 
     <!-- Code Section -->
-    <section id="code">
+    <section id="code" class="bg-dark">
         <div class="container">
-            <span class="section-label">CODE</span>
-            <h2>Implementation Example</h2>
-            <p>See how our solution can be integrated into your systems using our API and deployment scripts.</p>
+            <span class="section-label reveal">Implementation</span>
+            <h2 class="reveal reveal-delay-1">Production-Ready<br>Code</h2>
+            <p class="large-text reveal reveal-delay-2">Deploy in minutes with Modal.com. Full source available.</p>
 
-            <div class="code-wrapper reveal">
+            <!-- Quick Start -->
+            <div class="code-wrapper reveal reveal-delay-3">
                 <div class="code-header">
                     <div class="code-header-left">
                         <div class="code-dots">
@@ -1928,7 +2504,7 @@ modal deploy chequescan.py
             </div>
 
             <!-- Main Code -->
-            <div class="code-wrapper reveal">
+            <div class="code-wrapper reveal reveal-delay-4">
                 <div class="code-header">
                     <div class="code-header-left">
                         <div class="code-dots">
@@ -1976,8 +2552,79 @@ BANGLADESH_BANKS = {
         prompt = <span class="string">f"Extract from Bangladesh cheque: {text[:500]}"</span>
         response = <span class="keyword">self</span>.gemini.generate_content([prompt, image])
         <span class="keyword">return</span> json.loads(re.search(<span class="string">r'\{.*\}'</span>, response.text).group())
-</pre>
+
+    <span class="decorator">@modal.web_endpoint(method="POST")</span>
+    <span class="keyword">def</span> <span class="function">web</span>(<span class="keyword">self</span>, image_file: fastapi.UploadFile):
+        image_bytes = image_file.file.read()
+        result = <span class="keyword">self</span>.process.call(image_bytes) <span class="comment"># Use .call() for sync</span>
+        <span class="keyword">return</span> result
+
+<span class="decorator">@app.local_entrypoint()</span>
+<span class="keyword">def</span> <span class="function">main</span>():
+    <span class="keyword">with</span> open(<span class="string">"test_cheque.jpg"</span>, <span class="string">"rb"</span>) <span class="keyword">as</span> f:
+        result = ChequeProcessor().process.remote(f.read())
+    <span class="keyword">print</span>(result)</pre>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section id="comparison" class="bg-dark">
+        <div class="container">
+            <span class="section-label reveal">Market Comparison</span>
+            <h2 class="reveal reveal-delay-1">Why Local<br>Solutions Matter</h2>
+            <p class="large-text reveal reveal-delay-2">Performance and cost comparison against global alternatives.</p>
+
+            <div class="reveal reveal-delay-3">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>BanglaFinance</th>
+                            <th>Google Document AI</th>
+                            <th>Amazon Textract</th>
+                            <th>Local Vendor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature">Accuracy (BD Cheques)</td>
+                            <td class="comparison-highlight">99.5%</td>
+                            <td>~75%</td>
+                            <td>~70%</td>
+                            <td>~88%</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Bengali Text Support</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Bank Format Support</td>
+                            <td class="check">✓</td>
+                            <td class="cross">✗</td>
+                            <td class="cross">✗</td>
+                            <td class="check">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Cost / Document</td>
+                            <td class="comparison-highlight" style="color: var(--accent);">$0.002</td>
+                            <td>$0.015</td>
+                            <td>$0.015</td>
+                            <td>$0.50+</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Accuracy (BD)</td>
+                            <td class="comparison-highlight" style="color: var(--accent);">99.5%</td>
+                            <td>~75%</td>
+                            <td>~70%</td>
+                            <td>~88%</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
@@ -1985,48 +2632,77 @@ BANGLADESH_BANKS = {
     <!-- Roadmap Section -->
     <section id="roadmap" class="bg-dark">
         <div class="container">
-            <span class="section-label">ROADMAP</span>
-            <h2>Development Journey</h2>
-            <p>Track our progress and upcoming features.</p>
+            <span class="section-label reveal">Roadmap</span>
+            <h2 class="reveal reveal-delay-1">Development Journey</h2>
+            <p class="large-text reveal reveal-delay-2">Track our progress and upcoming features.</p>
 
             <div class="roadmap">
                 <div class="roadmap-item completed">
                     <h3>Q1 2024: Core OCR</h3>
-                    <p>Implemented basic text extraction for standard cheques.</p>
+                    <div class="roadmap-desc">Implemented basic text extraction for standard cheques.</div>
+                    <div class="roadmap-features">
+                        <span class="roadmap-feature">PaddleOCR integration</span>
+                        <span class="roadmap-feature">Basic layout analysis</span>
+                        <span class="roadmap-feature">Initial accuracy: 95%</span>
+                    </div>
                 </div>
                 <div class="roadmap-item completed">
                     <h3>Q2 2024: Multimodal AI</h3>
-                    <p>Integrated Gemini Pro Vision for contextual understanding.</p>
+                    <div class="roadmap-desc">Integrated Gemini Pro Vision for contextual understanding.</div>
+                    <div class="roadmap-features">
+                        <span class="roadmap-feature">VLM analysis</span>
+                        <span class="roadmap-feature">Improved accuracy: 98%</span>
+                        <span class="roadmap-feature">Handwritten digit recognition</span>
+                    </div>
                 </div>
                 <div class="roadmap-item completed">
                     <h3>Q3 2024: Validation Engine</h3>
-                    <p>Added rule-based validation and fraud detection.</p>
+                    <div class="roadmap-desc">Added rule-based validation and fraud detection.</div>
+                    <div class="roadmap-features">
+                        <span class="roadmap-feature">Bank format validation</span>
+                        <span class="roadmap-feature">MICR line processing</span>
+                        <span class="roadmap-feature">Anomaly detection</span>
+                    </div>
                 </div>
                 <div class="roadmap-item current">
                     <h3>Q4 2024: API & Dashboard</h3>
-                    <p>Developing REST API and user dashboard for integration.</p>
+                    <div class="roadmap-desc">Developing REST API and user dashboard for integration.</div>
+                    <div class="roadmap-features">
+                        <span class="roadmap-feature">Modal deployment</span>
+                        <span class="roadmap-feature">API endpoints</span>
+                        <span class="roadmap-feature">Admin dashboard</span>
+                    </div>
                 </div>
                 <div class="roadmap-item">
                     <h3>Q1 2025: Invoice Processing</h3>
-                    <p>Extending capabilities to handle invoices and bills.</p>
+                    <div class="roadmap-desc">Extending capabilities to handle invoices and bills.</div>
+                    <div class="roadmap-features">
+                        <span class="roadmap-feature">Invoice OCR models</span>
+                        <span class="roadmap-feature">Tax calculation logic</span>
+                        <span class="roadmap-feature">Vendor management</span>
+                    </div>
                 </div>
                 <div class="roadmap-item">
-                    <h3>Q2 2025: Multi-Language</h3>
-                    <p>Adding support for Bengali text processing.</p>
+                    <h3>Q2 2025: Full Ecosystem</h3>
+                    <div class="roadmap-desc">Custom fine-tuned VLM. Complete financial document ecosystem.</div>
+                    <div class="roadmap-features">
+                        <span class="roadmap-feature">BanglaDocVL model</span>
+                        <span class="roadmap-feature">LC documents</span>
+                        <span class="roadmap-feature">Mobile SDK</span>
+                        <span class="roadmap-feature">White-label</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing">
+    <section class="bg-dark">
         <div class="container">
-            <span class="section-label">PRICING</span>
-            <h2>Simple, Transparent Plans</h2>
-            <p>Choose the plan that fits your document processing needs.</p>
-
+            <span class="section-label reveal">Pricing</span>
+            <h2 class="reveal reveal-delay-1">Simple,<br>Transparent</h2>
             <div class="pricing-grid">
-                <div class="pricing-card">
+                <div class="pricing-card reveal">
                     <h3 class="pricing-name">Starter</h3>
                     <p class="pricing-desc">Perfect for small businesses and startups.</p>
                     <div class="pricing-price">$0<span>/month</span></div>
@@ -2040,7 +2716,7 @@ BANGLADESH_BANKS = {
                         <a href="#" class="btn btn-outline">Get Started</a>
                     </div>
                 </div>
-                <div class="pricing-card featured">
+                <div class="pricing-card reveal reveal-delay-1 featured">
                     <h3 class="pricing-name">Professional</h3>
                     <p class="pricing-desc">For growing businesses with higher volumes.</p>
                     <div class="pricing-price">$49<span>/month</span></div>
@@ -2055,7 +2731,7 @@ BANGLADESH_BANKS = {
                         <a href="#" class="btn btn-primary">Choose Plan</a>
                     </div>
                 </div>
-                <div class="pricing-card">
+                <div class="pricing-card reveal reveal-delay-2">
                     <h3 class="pricing-name">Enterprise</h3>
                     <p class="pricing-desc">For large institutions with custom needs.</p>
                     <div class="pricing-price">Custom</div>
@@ -2088,12 +2764,12 @@ BANGLADESH_BANKS = {
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="nav-logo">
-                        <span class="nav-logo-icon">M</span>
+                    <a href="#" class="logo">
+                        <span class="logo-icon">M</span>
                         M0NARQ
                     </a>
                     <p>AI-powered document processing for the modern financial sector.</p>
@@ -2225,7 +2901,7 @@ BANGLADESH_BANKS = {
                 models: 'OCR, VLM',
                 quality: 'High',
                 bankLogo: '🏦',
-                bankNameBn: 'IFIC ব্যাংক',
+                bankNameBn: 'IFIC BANK LTD',
                 date: '১৫/১১/২০২৪',
                 payee: 'শ্রী মোহাম্মদ হাসান',
                 amountWords: 'এক হাজার পাঁচ শত টাকা মাত্র',
@@ -2249,8 +2925,8 @@ BANGLADESH_BANKS = {
                     message: 'Cheque details match bank records.'
                 }
             },
-            lowQuality: {
-                name: 'Low Quality',
+            lowLight: {
+                name: 'Low Light',
                 time: 620,
                 models: 'OCR, VLM, Enhance',
                 quality: 'Medium',
@@ -2263,7 +2939,7 @@ BANGLADESH_BANKS = {
                 account: '9876543210',
                 micr: 'C:9876543210A:987654321B:CITY',
                 signature: 'জন ডো',
-                chequeClass: 'blurry',
+                chequeClass: 'dark',
                 result: {
                     bank: { value: 'City Bank', conf: 97.2 },
                     account: { value: '9876543210', conf: 96.5 },
@@ -2277,6 +2953,36 @@ BANGLADESH_BANKS = {
                 validation: {
                     valid: false,
                     message: 'Low image quality detected. Manual review recommended.'
+                }
+            },
+            rotated: {
+                name: 'Rotated',
+                time: 580,
+                models: 'OCR, VLM, Deskew',
+                quality: 'High',
+                bankLogo: '🔄',
+                bankNameBn: 'ইস্টার্ন ব্যাংক',
+                date: '০১/১২/২০২৪',
+                payee: 'এস. রহমান',
+                amountWords: 'পঞ্চাশ হাজার টাকা মাত্র',
+                amountFig: '50000.00',
+                account: '1122334455',
+                micr: 'C:1122334455A:112233445B:EAST',
+                signature: 'এস. রহমান',
+                chequeClass: 'rotated',
+                result: {
+                    bank: { value: 'Eastern Bank', conf: 98.1 },
+                    account: { value: '1122334455', conf: 97.8 },
+                    chequeNum: { value: '456123', conf: 96.5 },
+                    date: { value: '01/12/2024', conf: 97.2 },
+                    payee: { value: 'S. Rahman', conf: 96.0 },
+                    amountFig: { value: '50000.00', conf: 98.5 },
+                    amountWords: { value: 'Fifty Thousand Only', conf: 97.0 },
+                    micr: { value: 'C:1122334455A:112233445B:EAST', conf: 97.5 }
+                },
+                validation: {
+                    valid: true,
+                    message: 'Rotated cheque processed successfully.'
                 }
             },
             handwritten: {
@@ -2307,6 +3013,66 @@ BANGLADESH_BANKS = {
                 validation: {
                     valid: true,
                     message: 'Handwritten details validated successfully.'
+                }
+            },
+            crumpled: {
+                name: 'Crumpled',
+                time: 850,
+                models: 'OCR, VLM, Inpaint',
+                quality: 'Medium',
+                bankLogo: '📄',
+                bankNameBn: 'এনআরবি',
+                date: '১০/০৮/২০২৪',
+                payee: 'আর. আহমেদ',
+                amountWords: 'আট হাজার সাত শত পঞ্চাশ টাকা মাত্র',
+                amountFig: '8750.00',
+                account: '5566778899',
+                micr: 'C:5566778899A:556677889B:NRB',
+                signature: 'আর. আহমেদ',
+                chequeClass: 'crumpled',
+                result: {
+                    bank: { value: 'NRB', conf: 94.2 },
+                    account: { value: '5566778899', conf: 93.5 },
+                    chequeNum: { value: '789012', conf: 91.8 },
+                    date: { value: '10/08/2024', conf: 92.5 },
+                    payee: { value: 'R. Ahmed', conf: 90.1 },
+                    amountFig: { value: '8750.00', conf: 94.8 },
+                    amountWords: { value: 'Eight Thousand Seven Hundred Fifty Only', conf: 91.5 },
+                    micr: { value: 'C:5566778899A:556677889B:NRB', conf: 95.2 }
+                },
+                validation: {
+                    valid: false,
+                    message: 'Document appears damaged. Verify manually.'
+                }
+            },
+            partial: {
+                name: 'Partial',
+                time: 900,
+                models: 'OCR, VLM, Context',
+                quality: 'Low-Medium',
+                bankLogo: '✂️',
+                bankNameBn: 'ইস্টার্ন ব্যাংক',
+                date: '২২/০৭/২০২৪',
+                payee: 'সালাম মিয়াহ্',
+                amountWords: 'আঠারো হাজার পাঁচ শত টাকা মাত্র',
+                amountFig: '18500.00',
+                account: '9988776655',
+                micr: 'C:9988776655A:998877665B:EAST',
+                signature: 'সালাম মিয়াহ্',
+                chequeClass: 'partial',
+                result: {
+                    bank: { value: 'Eastern Bank', conf: 85.3 },
+                    account: { value: '9988776655', conf: 82.0 },
+                    chequeNum: { value: '321654', conf: 78.5 },
+                    date: { value: '22/07/2024', conf: 80.0 },
+                    payee: { value: 'Salam Mia', conf: 79.2 },
+                    amountFig: { value: '18500.00', conf: 88.5 },
+                    amountWords: { value: 'Eighteen Thousand Five Hundred Only', conf: 77.0 },
+                    micr: { value: 'C:9988776655A:998877665B:EAST', conf: 75.5 }
+                },
+                validation: {
+                    valid: false,
+                    message: 'Incomplete capture. Requires manual review.'
                 }
             }
             // Add more scenarios as needed
@@ -2473,7 +3239,10 @@ BANGLADESH_BANKS = {
                     if (icon) icon.textContent = scenario.validation.valid ? '✅' : '⚠️';
                     if (title) title.textContent = scenario.validation.valid ? 'Validation Passed' : 'Needs Review';
                     if (message) message.textContent = scenario.validation.message;
-                    if (validationResult) validationResult.style.display = 'flex';
+                    if (validationResult) {
+                        validationResult.style.display = 'flex';
+                        validationResult.className = scenario.validation.valid ? 'validation-status valid' : 'validation-status warning';
+                    }
                 }, fields.length * 120 + 200);
 
                 const procTime = document.getElementById('procTime');
